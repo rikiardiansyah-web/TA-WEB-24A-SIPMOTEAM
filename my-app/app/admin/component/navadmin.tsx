@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
-import "./nav.css";
+import "./navadmin.css";
 
 export default function NavAdmin() {
   const pathname = usePathname();
@@ -29,6 +29,8 @@ export default function NavAdmin() {
 
   return (
     <div className="navbar flex items-center justify-between px-4">
+
+      {/* LEFT */}
       <div className="navleft">
         <span className="text">SIPMO</span>
       </div>
@@ -38,8 +40,13 @@ export default function NavAdmin() {
         <Link href="/admin" className={linkClass("/admin")}>
           Home
         </Link>
+
         <Link href="/about" className={linkClass("/about")}>
           About
+        </Link>
+
+        <Link href="/profile" className={linkClass("/profile")}>
+          Profile
         </Link>
       </div>
 

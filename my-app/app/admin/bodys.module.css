@@ -1,0 +1,35 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 20vh;
+    margin-bottom: 0;
+}
+.title {
+    font-size: 2.5rem;
+    margin-bottom: 5px;
+    font-family: 'RuntimeRegular';
+}
+@font-face {
+    font-family: 'RuntimeRegular';
+    src: url('/fonts/RuntimeRegular-m2Odx.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+.leftbody {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: justify;
+    margin: 40px;
+}
+.rightbody {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: justify;
+    margin: 40px;
+}
