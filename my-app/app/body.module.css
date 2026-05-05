@@ -6,7 +6,7 @@
     height: 20vh;
     margin-bottom: 0;
 }
-h1 {
+.titlee {
     font-size: 2.5rem;
     margin-bottom: 5px;
     font-family: 'RuntimeRegular';
@@ -32,4 +32,12 @@ h1 {
     justify-content: center;
     text-align: justify;
     margin: 40px;
+}
+.homebody {
+    background: linear-gradient(135deg, #2996bf, #6dd5fa);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px;
+    margin-top: 50px;
+    justify-content: center;
 }
