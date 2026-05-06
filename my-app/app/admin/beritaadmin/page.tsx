@@ -1,17 +1,44 @@
 "use client";
 
-import Link from "next/link";
+import { useEffect, useState } from "react";
 
-export default function BeritaAdmin() {
+type Berita = {
+  id: number;
+  judul: string;
+  deskripsi: string;
+  createdAt: string;
+};
+
+export default function BeritaPage() {
+  const [data, setData] = useState<Berita[]>([]);
+
+  const fetchData = async () => {
+    const res = await fetch("/api/berita");
+    const json = (await res.json()) as Berita[];
+    setData(json);
+  };
+
+  useEffect(() => {
+    const loadData = async () => {
+      await fetchData();
+    };
+    loadData();
+  }, []);
+
   return (
-    <div className="p-6">
-      <h1 className="text-xl font-bold mb-4">Kelola Berita</h1>
+    <div>
+      <h1>Daftar Berita</h1>
 
-      <Link href="/admin/berita/tambah">
-        <button className="bg-blue-600 text-white px-4 py-2 rounded">
-          + Tambah Berita
-        </button>
-      </Link>
+      <a href="/admin/beritaadmin/tambah">+ Tambah Berita</a>
+
+      <ul>
+        {data.map((item) => (
+          <li key={item.id}>
+            <b>{item.judul}</b>
+            <p>{item.deskripsi}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

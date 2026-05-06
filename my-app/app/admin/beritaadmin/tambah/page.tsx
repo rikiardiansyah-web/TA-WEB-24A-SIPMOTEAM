@@ -6,35 +6,34 @@ export default function TambahBerita() {
   const [judul, setJudul] = useState("");
   const [deskripsi, setDeskripsi] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
+  const submit = async () => {
     await fetch("/api/berita", {
       method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ judul, deskripsi }),
     });
 
-    alert("Berita berhasil ditambahkan");
+    alert("Berita berhasil ditambah");
+    window.location.href = "/berita"; // balik ke list
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-6 space-y-4">
+    <div>
+      <h1>Tambah Berita</h1>
+
       <input
-        type="text"
         placeholder="Judul"
+        value={judul}
         onChange={(e) => setJudul(e.target.value)}
-        className="border p-2 w-full"
       />
 
       <textarea
         placeholder="Deskripsi"
+        value={deskripsi}
         onChange={(e) => setDeskripsi(e.target.value)}
-        className="border p-2 w-full"
       />
 
-      <button className="bg-green-600 text-white px-4 py-2 rounded">
-        Simpan
-      </button>
-    </form>
+      <button onClick={submit}>Simpan</button>
+    </div>
   );
 }
