@@ -41,8 +41,8 @@ export default function NavAdmin() {
           Home
         </Link>
 
-        <Link href="/about" className={linkClass("/about")}>
-          About
+        <Link href="/admin/beritaadmin" className={linkClass("/admin/beritaadmin")}>
+          Berita
         </Link>
 
         <Link href="/profile" className={linkClass("/profile")}>

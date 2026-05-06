@@ -1,7 +1,6 @@
 .container {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
     height: 20vh;
     margin-bottom: 0;
@@ -34,10 +33,9 @@
     margin: 40px;
 }
 .homebody {
-    background: linear-gradient(135deg, #2996bf, #6dd5fa);
+    background: linear-gradient(135deg, #0081B3, #7ED957);
     padding: 20px;
     border-radius: 10px;
-    margin: 20px;
+    margin: 30px;
     margin-top: 50px;
-    justify-content: center;
 }

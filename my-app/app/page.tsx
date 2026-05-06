@@ -8,13 +8,13 @@ export default function Home() {
   return (
     <>
       <Menu /> {/* Nav menu */}
-      <div className={`flex flex-col md:flex-row ${styles.homebody}`}>
-      <div className="container">
+      <div className={styles.homebody}>
+      <div className={` text-center ${styles.container}`}>
         <h1 className={styles.titlee}>Selamat Datang di SIPMO</h1>
         <p>Sistem Informasi Pengaduan Masyarakat Online</p>
       </div>
       <div className="flex flex-col md:flex-row items-center justify-center gap-1 mt-8">
-        <div className="w-full md:w-1/2 leftbody">
+        <div className={`w-full md:w-1/2 order-2 md:order-2 ${styles.leftbody}`}>
         <p>Desa Sungai Nibung</p>
           Desa Sungai Nibung merupakan salah satu desa yang terletak 
           di Kecamatan Dente Teladas, Kabupaten Tulang Bawang, Provinsi Lampung.
@@ -22,11 +22,11 @@ export default function Home() {
           khususnya di sektor perikanan dan ekosistem mangrove. Desa Sungai Nibung merupakan salah satu dari 
           sekitar 12 desa yang ada di Kecamatan Dente Teladas dan memiliki karakter wilayah pesisir yang strategis.
         </div>
-        <div className="w-full md:w-1/2 rightbody">
+        <div className={`w-full max-w-md md:w-1/2 order-1 md:order-2 ${styles.rightbody}`}>
           <img
-            src="/images/gambar1.png"
+            src="/images/gambat1.jpg"
             alt="Desa Sungai Nibung"
-            className="w-full h-auto rounded-lg shadow-md"
+            className="w-full max-w-md mx-auto h-auto rounded-lg shadow-md"
             />
         </div>
       </div>
@@ -39,9 +39,9 @@ export default function Home() {
     </button>
   </Link>
 
-  <Link href="/Beranda">
+  <Link href="/berita">
     <button className="px-5 py-2 rounded-full bg-yellow-900 text-white hover:bg-yellow-600 transition">
-      Beranda
+      Berita
     </button>
   </Link>
   <Link href="/beranda">
@@ -50,13 +50,13 @@ export default function Home() {
     </button>
   </Link>
 </div>
-      <div className={`flex flex-col md:flex-row ${styles.homebody}`}>
-      <div className="container">
+      <div className={styles.homebody}>
+      <div className={` text-center ${styles.container}`}>
         <h1 className={styles.titlee}>Selamat Datang di SIPMO</h1>
         <p>Sistem Informasi Pengaduan Masyarakat Online</p>
       </div>
       <div className="flex flex-col md:flex-row items-center justify-center gap-1 mt-8">
-        <div className="w-full md:w-1/2 leftbody">
+        <div className={`w-full md:w-1/2 ${styles.leftbody}`}>
         <p>Desa Sungai Nibung</p>
           Desa Sungai Nibung merupakan salah satu desa yang terletak 
           di Kecamatan Dente Teladas, Kabupaten Tulang Bawang, Provinsi Lampung.
@@ -64,8 +64,12 @@ export default function Home() {
           khususnya di sektor perikanan dan ekosistem mangrove. Desa Sungai Nibung merupakan salah satu dari 
           sekitar 12 desa yang ada di Kecamatan Dente Teladas dan memiliki karakter wilayah pesisir yang strategis.
         </div>
-        <div className="w-full md:w-1/2 rightbody">
-          SIPMO memungkinkan masyarakat untuk melaporkan masalah secara real-time dan memantau status pengaduan mereka. Sistem ini juga menyediakan fitur untuk memberikan feedback dan evaluasi terhadap layanan yang diberikan.
+        <div className={`w-full md:w-1/2 ${styles.rightbody}`}>
+          <img
+            src="/images/gambat1.jpg"
+            alt="Desa Sungai Nibung"
+            className="w-full h-auto rounded-lg shadow-md"
+            />
         </div>
       </div>
       </div>
