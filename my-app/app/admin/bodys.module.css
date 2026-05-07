@@ -33,3 +33,24 @@
     text-align: justify;
     margin: 40px;
 }
+
+.hero {
+  background-image: url('/images/gambat1.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 40px;
+  border-radius: 20px;
+  color: white;
+  text-align: center;
+
+  backdrop-filter: blur(5px);
+}

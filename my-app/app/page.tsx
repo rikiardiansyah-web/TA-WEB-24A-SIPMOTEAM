@@ -8,9 +8,10 @@ export default function Home() {
   return (
     <>
       <Menu /> {/* Nav menu */}
-      <div className={styles.homebody}>
+      <div className={styles.beranda}>
+      <div className={styles.transparan}>
       <div className={` text-center ${styles.container}`}>
-        <h1 className={styles.titlee}>Selamat Datang di SIPMO</h1>
+        <h1 className={styles.titlee}>Selamat Datang Sipmo - Desa Sungai Nibung</h1>
         <p>Sistem Informasi Pengaduan Masyarakat Online</p>
       </div>
       <div className="flex flex-col md:flex-row items-center justify-center gap-1 mt-8">
@@ -22,13 +23,18 @@ export default function Home() {
           khususnya di sektor perikanan dan ekosistem mangrove. Desa Sungai Nibung merupakan salah satu dari 
           sekitar 12 desa yang ada di Kecamatan Dente Teladas dan memiliki karakter wilayah pesisir yang strategis.
         </div>
-        <div className={`w-full max-w-md md:w-1/2 order-1 md:order-2 ${styles.rightbody}`}>
-          <img
-            src="/images/gambat1.jpg"
-            alt="Desa Sungai Nibung"
-            className="w-full max-w-md mx-auto h-auto rounded-lg shadow-md"
-            />
-        </div>
+  
+      </div>
+      <div >
+        <a >
+          Jika Kamu Bagian Dari Desa Sungai Nibung, Silahkan Kirimkan MasukanMu Dibawah ini
+        </a>
+      </div>
+      <Link href="/berita">
+    <button className="px-50 py-2 rounded-full bg-blue-800 text-white hover:bg-blue-300 transition">
+      Berikan Saranmu
+    </button>
+  </Link>
       </div>
       </div>
 

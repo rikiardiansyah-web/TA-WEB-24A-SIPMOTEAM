@@ -1,3 +1,4 @@
+
 .container {
     display: flex;
     flex-direction: column;
@@ -8,11 +9,11 @@
 .titlee {
     font-size: 2.5rem;
     margin-bottom: 5px;
-    font-family: 'RuntimeRegular';
+    font-family: 'Ananda';
 }
 @font-face {
-    font-family: 'RuntimeRegular';
-    src: url('/fonts/RuntimeRegular-m2Odx.ttf') format('truetype');
+    font-family: 'Ananda';
+    src: url('/fonts/AnandaBlackPersonalUseRegular-rg9Rx.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -38,4 +39,20 @@
     border-radius: 10px;
     margin: 30px;
     margin-top: 50px;
+}
+.beranda {
+  background-image: url('/images/gambar1.jpeg');
+  background-size: cover;
+  background-position: center;
+  padding-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.transparan {
+  background: rgba(0, 0, 0, 0.329);
+  color: white;
+  text-align: center;
+  backdrop-filter: blur(3px);
+  padding-bottom: 20px;
 }
