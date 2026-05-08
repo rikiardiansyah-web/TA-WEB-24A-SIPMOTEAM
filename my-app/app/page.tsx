@@ -1,10 +1,14 @@
+"use client";
+
 import Image from "next/image";
 import Menu from "./components/navbar";
 import styles from "./body.module.css";
 import Link from "next/link";
 import Footer from "./components/footer";
+import { useState } from "react";
 
 export default function Home() {
+  const [open, setOpen] = useState(false);
   return (
     <>
       <Menu /> {/* Nav menu */}
@@ -30,13 +34,44 @@ export default function Home() {
           Jika Kamu Bagian Dari Desa Sungai Nibung, Silahkan Kirimkan MasukanMu Dibawah ini
         </a>
       </div>
-      <Link href="/berita">
-    <button className="px-50 py-2 rounded-full bg-blue-800 text-white hover:bg-blue-300 transition">
+    <button 
+    onClick={() => setOpen(true)}
+    className="px-50 py-2 rounded-full bg-blue-800 text-white hover:bg-blue-300 transition">
       Berikan Saranmu
     </button>
-  </Link>
       </div>
       </div>
+      {open && (
+        <div className={styles.modalOverlay}>
+        <div className={styles.modalBox}>
+
+        <button
+         onClick={() => setOpen(false)}
+        className={styles.closeBtn}
+      >x
+      </button>
+      <h2 className={styles.modalTitle}>
+        Kirim Masukan
+      </h2>
+
+      <input
+        type="text"
+        placeholder="Masukkan NIK / Nama"
+        className={styles.input}
+      />
+      <textarea
+        placeholder="Kirimkan Masukanmu Disini..."
+        className={styles.textarea}
+      />
+      <button className={styles.submitBtn}>
+        Kirim
+        </button>
+
+      </div>
+      </div>
+      )}
+
+
 
 <div className="flex justify-center gap-4 mt-6">
   <Link href="/">
