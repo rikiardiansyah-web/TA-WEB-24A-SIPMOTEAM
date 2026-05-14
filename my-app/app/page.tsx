@@ -5,10 +5,82 @@ import Menu from "./components/navbar";
 import styles from "./body.module.css";
 import Link from "next/link";
 import Footer from "./components/footer";
-import { useState } from "react";
+import { useEffect , useState } from "react";
+
+type Berita = {
+  id: number;
+  judul: string;
+  deskripsi: string;
+  gambar: string;
+  createdAt: string;
+};
 
 export default function Home() {
   const [open, setOpen] = useState(false);
+  const [nik, setNik] = useState("");
+  const [pesan, setPesan] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [notifPesan, setNotifPesan] = useState(0);
+  const [berita, setBerita] = useState<Berita[]>([]);
+
+  const kirimPesan = async () => {
+  if (!nik || !pesan) {
+    alert("Isi semua field");
+    return;
+  }
+
+  try {
+    setLoading(true);
+
+    const res = await fetch("/api/pesan", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        nik,
+        isi: pesan,
+      }),
+    });
+
+    const result = await res.json();
+
+    if (!res.ok) {
+      alert(result.error);
+      return;
+    }
+
+    alert("Pesan berhasil dikirim");
+
+    setNik("");
+    setPesan("");
+    setOpen(false);
+
+  } catch (error) {
+    console.error(error);
+    alert("Terjadi kesalahan");
+  } finally {
+    setLoading(false);
+  }
+};
+
+useEffect(() => {
+  const loadData = async () => {
+    try {
+      const res = await fetch("/api/berita");
+
+      const data = await res.json();
+
+      setBerita(data);
+
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  loadData();
+}, []);
+
   return (
     <>
       <Menu /> {/* Nav menu */}
@@ -58,14 +130,21 @@ export default function Home() {
         type="text"
         placeholder="Masukkan NIK / Nama"
         className={styles.input}
+        value={nik}
+        onChange={(e) => setNik(e.target.value)}
       />
       <textarea
         placeholder="Kirimkan Masukanmu Disini..."
         className={styles.textarea}
+        value={pesan}
+        onChange={(e) => setPesan(e.target.value)}
       />
-      <button className={styles.submitBtn}>
-        Kirim
-        </button>
+      <button className={styles.submitBtn}
+        onClick={kirimPesan}
+        disabled={loading}
+      >
+        {loading ? "Mengirim..." : "Kirim"}
+      </button>
 
       </div>
       </div>
@@ -88,6 +167,19 @@ export default function Home() {
   <Link href="/beranda">
     <button className="px-5 py-2 rounded-full bg-blue-900 text-white hover:bg-yellow-600 transition">
     Beranda
+    </button>
+  </Link>
+  <Link href="/riwayatpesan">
+    <button className="relative px-5 py-2 rounded-full bg-red-800 text-white hover:bg-red-600 transition">
+
+    Riwayat Pesan
+
+    {notifPesan > 0 && (
+      <span className="absolute -top-2 -right-2 bg-yellow-400 text-black text-xs w-5 h-5 rounded-full flex items-center justify-center">
+        {notifPesan}
+      </span>
+    )}
+
     </button>
   </Link>
 </div>
@@ -114,6 +206,44 @@ export default function Home() {
         </div>
       </div>
       </div>
+
+      <div className="px-5 py-10">
+
+  <h1 className="text-3xl font-bold text-center mb-8">
+    Berita Terbaru
+  </h1>
+
+  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+    {berita.slice(0, 3).map((item) => (
+    <Link
+      href="/berita"
+      key={item.id}
+      className="bg-white rounded-2xl shadow-lg overflow-hidden hover:scale-105 transition duration-300 block"
+    >
+
+        <img
+          src={item.gambar}
+          alt={item.judul}
+          className="w-full h-52 object-cover"
+        />
+
+        <div className="p-5">
+
+          <h2 className="text-xl font-bold mb-3">
+            {item.judul}
+          </h2>
+
+          <p className="text-gray-600 line-clamp-3">
+            {item.deskripsi}
+          </p>
+
+        </div>
+      </Link>
+    ))}
+
+  </div>
+</div>
 
       <Footer /> {/* Footer */}
     </>

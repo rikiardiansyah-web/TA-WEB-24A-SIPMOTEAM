@@ -1,39 +1,110 @@
 "use client";
 
 import { useState } from "react";
+import styles from "../beritaadmin.module.css";
 
 export default function TambahBerita() {
   const [judul, setJudul] = useState("");
   const [deskripsi, setDeskripsi] = useState("");
+  const [gambar, setGambar] = useState<File | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const submit = async () => {
-    await fetch("/api/berita", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ judul, deskripsi }),
-    });
+    if (!judul || !deskripsi || !gambar) {
+      alert("Semua field wajib diisi");
+      return;
+    }
 
-    alert("Berita berhasil ditambah");
-    window.location.href = "/berita"; // balik ke list
+    try {
+      setLoading(true);
+
+      const formData = new FormData();
+
+      formData.append("judul", judul);
+      formData.append("deskripsi", deskripsi);
+      formData.append("gambar", gambar);
+
+      await fetch("/api/berita", {
+        method: "POST",
+        body: formData,
+      });
+
+      alert("Berita berhasil ditambah");
+
+      window.location.href = "/admin/beritaadmin";
+
+    } catch (error) {
+      console.error(error);
+      alert("Gagal menambah berita");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div>
-      <h1>Tambah Berita</h1>
+    <div className={styles.container}>
 
-      <input
-        placeholder="Judul"
-        value={judul}
-        onChange={(e) => setJudul(e.target.value)}
-      />
+      <div className={styles.formCard}>
 
-      <textarea
-        placeholder="Deskripsi"
-        value={deskripsi}
-        onChange={(e) => setDeskripsi(e.target.value)}
-      />
+        <h1 className={styles.title}>
+          Tambah Berita
+        </h1>
 
-      <button onClick={submit}>Simpan</button>
+        <p className={styles.subtitle}>
+          Tambahkan informasi terbaru desa
+        </p>
+
+        {/* JUDUL */}
+        <div className={styles.formGroup}>
+          <label>Judul Berita</label>
+
+          <input
+            type="text"
+            placeholder="Masukkan judul berita"
+            value={judul}
+            onChange={(e) => setJudul(e.target.value)}
+            className={styles.input}
+          />
+        </div>
+
+        {/* DESKRIPSI */}
+        <div className={styles.formGroup}>
+          <label>Deskripsi</label>
+
+          <textarea
+            placeholder="Masukkan isi berita"
+            value={deskripsi}
+            onChange={(e) => setDeskripsi(e.target.value)}
+            className={styles.textarea}
+          />
+        </div>
+
+        {/* GAMBAR */}
+        <div className={styles.formGroup}>
+          <label>Upload Gambar</label>
+
+          <input
+            type="file"
+            accept="image/*"
+            className={styles.fileInput}
+            onChange={(e) => {
+              if (e.target.files) {
+                setGambar(e.target.files[0]);
+              }
+            }}
+          />
+        </div>
+
+        {/* BUTTON */}
+        <button
+          onClick={submit}
+          className={styles.submitButton}
+          disabled={loading}
+        >
+          {loading ? "Menyimpan..." : "Simpan Berita"}
+        </button>
+
+      </div>
     </div>
   );
 }

@@ -1,0 +1,157 @@
+.container {
+  padding: 40px;
+  min-height: 100vh;
+  background: #f5f7fb;
+  margin-top: 40px;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #004467;
+}
+.subtitle {
+  color: gray;
+  margin-top: 5px;
+}
+.buttonTambah {
+  background: #004467;
+  color: white;
+  padding: 14px 22px;
+  border-radius: 14px;
+  text-decoration: none;
+  transition: 0.3s;
+  font-weight: 600;
+}
+.buttonTambah:hover {
+  background: #004467;
+}
+.gridBerita {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 25px;
+}
+.card {
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+  transition: 0.3s;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+}
+.image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+.content {
+  padding: 20px;
+}
+.judul {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #1f2937;
+}
+.deskripsi {
+  color: #4b5563;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.tanggal {
+  color: gray;
+  font-size: 14px;
+}
+.buttonGroup {
+  display: flex;
+  gap: 10px;
+}
+.edit {
+  background: #facc15;
+  border: none;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.hapus {
+  background: #ef4444;
+  border: none;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.kosong {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  color: gray;
+  box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+}
+.formCard {
+  max-width: 700px;
+  margin: auto;
+  background: white;
+  padding: 40px;
+  border-radius: 24px;
+  box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+}
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 25px;
+}
+.formGroup label {
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #004467;
+}
+.input,
+.textarea,
+.fileInput {
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid #d1d5db;
+  outline: none;
+  font-size: 16px;
+}
+.input:focus,
+.textarea:focus {
+  border-color: #004467;
+}
+.textarea {
+  min-height: 180px;
+  resize: none;
+}
+.submitButton {
+  width: 100%;
+  background: #004467;
+  color: white;
+  border: none;
+  padding: 16px;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.submitButton:hover {
+  background: #004467;
+}

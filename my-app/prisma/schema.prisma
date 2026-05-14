@@ -15,5 +15,24 @@ model Berita {
   id        Int      @id @default(autoincrement())
   judul     String
   deskripsi String
+  gambar    String
+  createdAt DateTime @default(now())
+}
+
+model warga {
+  nik       Int      @id
+  username  String   @unique
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  noTelepon String
+}
+
+model Pesan {
+  id        Int      @id @default(autoincrement())
+  nik       Int
+  nama      String
+  isi       String
   createdAt DateTime @default(now())
 }

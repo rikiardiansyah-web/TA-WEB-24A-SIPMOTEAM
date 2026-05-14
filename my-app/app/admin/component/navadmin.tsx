@@ -11,9 +11,8 @@ export default function NavAdmin() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    document.body.classList.toggle("dark", darkMode);
-    document.body.classList.toggle("light", !darkMode);
-  }, [darkMode]);
+  document.documentElement.classList.toggle("dark", darkMode);
+}, [darkMode]);
 
   const linkClass = (path: string) =>
     `relative px-3 py-2 transition-all duration-300
