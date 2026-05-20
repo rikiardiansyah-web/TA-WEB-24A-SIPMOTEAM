@@ -1,3 +1,6 @@
+"use client;"
+
+import Menu from "../components/navbar";
 type Berita = {
   id: number;
   judul: string;
@@ -14,6 +17,8 @@ export default async function BeritaUser() {
   const data = await res.json();
 
   return (
+    <>
+    <Menu /> {/* Nav menu */}
   <div className="mb-6">
       <h1 className="text-4xl font-bold">
         Portal Berita
@@ -53,5 +58,6 @@ export default async function BeritaUser() {
   </div>
   ))}
     </div>
+    </>
   );
 }
