@@ -20,17 +20,17 @@ export default async function BeritaUser() {
     <>
     <Menu /> {/* Nav menu */}
   <div className="mb-6">
-      <h1 className="text-4xl font-bold">
+      <h1 className="text-4xl font-bold dark:text-white">
         Portal Berita
       </h1>
       <div className="mb-4">
-     <p className="text-gray-500">
+     <p className="text-gray-500 dark:text-gray-300">
       Informasi terbaru dan terpercaya
     </p>
   </div>
     <div className="mb-4">
     </div>
-      <h1 className="text-xl font-bold mb-4">Berita</h1>
+      <h1 className="text-xl font-bold mb-4 dark:text-white">Berita</h1>
 
       <div className="border rounded-2xl p-4">
         
@@ -52,7 +52,7 @@ export default async function BeritaUser() {
       {item.judul}
     </h2>
 
-    <p className="mt-2">
+    <p className="mt-2 dark:text-gray-300">
       {item.deskripsi}
     </p>
   </div>
