@@ -18,6 +18,11 @@ export default async function BeritaUser() {
       <h1 className="text-4xl font-bold">
         Portal Berita
       </h1>
+    <div className="mb-4">
+     <p className="text-gray-500">
+      Informasi terbaru dan terpercaya
+    </p>
+  </div>
 
       <h1 className="text-xl font-bold mb-4">Berita</h1>
 
