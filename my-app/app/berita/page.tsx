@@ -15,7 +15,13 @@ export default async function BeritaUser() {
 
   return (
   <div className="mb-6">
+      <h1 className="text-4xl font-bold">
+        Portal Berita
+      </h1>
+    <div className="mb-4">
       
+      
+    </div>
       <h1 className="text-xl font-bold mb-4">Berita</h1>
 
       <div className="border rounded-2xl p-4">
