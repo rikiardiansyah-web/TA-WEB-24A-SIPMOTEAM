@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import DataWarga from "../components/DataWarga";
 
 import {
   FaNewspaper,
@@ -318,18 +319,7 @@ export default function AdminPage() {
             </div>
           )}
           {menu === "warga" && (
-            <div
-              className="
-                bg-white dark:bg-[#1e293b]
-                rounded-3xl
-                p-10
-                shadow-lg
-              "
-            >
-              <h1 className="text-3xl font-bold dark:text-white">
-                Data Warga
-              </h1>
-            </div>
+            <DataWarga />
           )}
           {menu === "pembangunan" && (
             <div

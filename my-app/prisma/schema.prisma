@@ -20,13 +20,16 @@ model Berita {
 }
 
 model warga {
-  nik       Int      @id
+  nik       String      @id
   username  String   @unique
-  name      String
+  nama      String
   email     String   @unique
   password  String
   createdAt DateTime @default(now())
   noTelepon String
+  alamat    String?
+  JenisKelamin String?
+  status    String? //aktif, pindah, dll
 }
 
 model Pesan {
