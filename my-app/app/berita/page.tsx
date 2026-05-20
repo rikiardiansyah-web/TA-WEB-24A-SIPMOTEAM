@@ -14,9 +14,16 @@ export default async function BeritaUser() {
   const data = await res.json();
 
   return (
-    
-    <div className="p-6">
+  <div className="mb-6">
+      <h1 className="text-4xl font-bold">
+        Portal Berita
+      </h1>
+
       <h1 className="text-xl font-bold mb-4">Berita</h1>
+
+      <div className="border rounded-2xl p-4">
+        
+      </div>
 
       {data.map((item: Berita) => (
   <div
