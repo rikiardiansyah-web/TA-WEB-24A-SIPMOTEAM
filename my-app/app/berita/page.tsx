@@ -20,9 +20,23 @@ export default async function BeritaUser() {
     <>
     <Menu /> {/* Nav menu */}
   <div className="mb-6">
-      <h1 className="text-4xl font-bold dark:text-white">
+      <h1 className="text-4xl font-bold dark:text-white mt-16">
         Portal Berita
       </h1>
+      <input
+  type="text"
+  placeholder="Cari berita..."
+  className="
+    w-full
+    border
+    p-3
+    rounded-xl
+    mb-6
+    dark:bg-gray-800
+    dark:text-white
+    
+  "
+  />
       <div className="mb-4">
      <p className="text-gray-500 dark:text-gray-300">
       Informasi terbaru dan terpercaya
