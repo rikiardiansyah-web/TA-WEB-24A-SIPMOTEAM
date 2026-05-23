@@ -106,19 +106,19 @@ export default async function BeritaUser() {
 
           {data.map((item: Berita) => (
             <div
-  key={item.id}
-  className="
-    max-w-5xl
-    mx-auto
-    bg-white
-    dark:bg-slate-800
-    rounded-3xl
-    overflow-hidden
-    shadow-lg
-    hover:scale-105
-    transition
-    duration-300
-  "
+          key={item.id}
+          className="
+            max-w-5xl
+            mx-auto
+            bg-white
+            dark:bg-slate-800
+            rounded-3xl
+            overflow-hidden
+            shadow-lg
+            hover:scale-105
+            transition
+            duration-300
+          "
 >
               {/* Gambar */}
               <img 
@@ -136,25 +136,25 @@ export default async function BeritaUser() {
               {/* Isi Card */}
               <div className= "p-8">
 
-        <h2 className="text-4xl font-bold">
+        <h2 className="text-4xl font-bold text-center ">
   Membangun Desa yang Lebih Maju
 </h2>
 
-<p className="
-  mt-6
-  text-lg
-  text-gray-200
-  max-w-3xl
-  leading-8
-  text-center
-  font-normal
-  mx-auto
-">
-  Informasi desa dan pengelolaan anggaran kini dapat diakses
-  dengan lebih mudah, transparan, dan terpercaya. Bersama
-  masyarakat, desa berkembang menuju masa depan yang lebih
-  maju dan sejahtera.
-</p>
+          <p className="
+            mt-6
+            text-lg
+            text-gray-700
+            max-w-3xl
+            leading-8
+            text-center
+            font-normal
+            mx-auto
+          ">
+            Informasi desa dan pengelolaan anggaran kini dapat diakses
+            dengan lebih mudah, transparan, dan terpercaya. Bersama
+            masyarakat, desa berkembang menuju masa depan yang lebih
+            maju dan sejahtera.
+          </p>
         <Image
               src="/images/berita2.PNG"
               alt="gambar tambahan"
