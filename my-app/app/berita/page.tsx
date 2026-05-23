@@ -137,7 +137,13 @@ export default async function BeritaUser() {
             {item.judul}
         </h2>
 
-                <p className="mt-4 text-gray-600 dark:text-gray-300 leading-relaxed">
+         <p className="
+          mt-4
+          text-gray-600
+          dark:text-gray-300
+          leading-8
+          text-lg
+        ">
                   {item.deskripsi}
                 </p>
 
