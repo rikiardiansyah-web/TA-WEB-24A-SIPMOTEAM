@@ -147,9 +147,21 @@ export default async function BeritaUser() {
           leading-8
           text-lg
         ">
-                  {item.deskripsi}
-                </p>
-
+         {item.deskripsi}
+       </p>
+        <Image
+              src="/images/berita2.PNG"
+              alt="gambar tambahan"
+              width={1200}
+              height={500}
+              className="
+               w-full
+              h-[350px]
+              object-cover
+              rounded-2xl
+               mt-6
+  "
+/>
               </div>
             </div>
           ))}
