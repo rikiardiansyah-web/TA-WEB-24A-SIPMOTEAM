@@ -1,6 +1,7 @@
-"use client;"
+"use client";
 
 import Menu from "../components/navbar";
+
 type Berita = {
   id: number;
   judul: string;
@@ -18,57 +19,138 @@ export default async function BeritaUser() {
 
   return (
     <>
-    <Menu /> {/* Nav menu */}
-    <div className="text-center pt-24 mb-10">
-  <h1 className="text-5xl font-extrabold text-slate-800 dark:text-white">
-    Portal Berita
-  </h1>
-   <p className="mt-4 text-xl text-gray-600 dark:text-gray-300">
-    Informasi Terbaru dan Terpercaya
-  </p>
-      <input
-  type="text"
-  placeholder="Cari berita..."
-  className="
-    w-full
-    border
-    p-3
-    rounded-xl
-    mb-6
-    dark:bg-gray-800
-    dark:text-white  
-  "
-  />
-      <div className="mb-4">
-     </div>
-      <div className="mb-4">
+      {/* Navbar */}
+      <Menu />
+
+      {/* Container */}
+      <div className="pt-24 px-6 max-w-7xl mx-auto">
+
+        {/* Heading */}
+        <div className="text-center mb-10">
+          <h1 className="text-5xl font-extrabold text-slate-800 dark:text-white">
+            Portal Berita
+          </h1>
+
+          <p className="mt-4 text-xl text-gray-600 dark:text-gray-300">
+            Informasi Terbaru dan Terpercaya
+          </p>
+        </div>
+
+        {/* Search */}
+        <input
+          type="text"
+          placeholder="Cari berita..."
+          className="
+            w-full
+            border
+            border-gray-300
+            p-4
+            rounded-2xl
+            mb-10
+            shadow-sm
+            focus:outline-none
+            focus:ring-2
+            focus:ring-blue-500
+            dark:bg-slate-800
+            dark:text-white
+          "
+        />
+
+        {/* Hero Section */}
+        <div className="mb-16">
+
+          <div
+            className="
+              bg-gradient-to-r
+              from-blue-700
+              to-slate-900
+              rounded-3xl
+              p-10
+              text-white
+              shadow-2xl
+            "
+          >
+            <h2 className="text-4xl font-bold">
+              Selamat Datang di SIPNO
+            </h2>
+
+            <p className="mt-4 text-lg text-gray-200 max-w-2xl leading-relaxed">
+              Temukan berbagai informasi terbaru,
+              terpercaya, dan paling update setiap hari
+              hanya di Portal Berita SIPNO.
+            </p>
+
+            <button
+              className="
+                mt-6
+                bg-white
+                text-blue-700
+                px-6
+                py-3
+                rounded-xl
+                font-semibold
+                hover:scale-105
+                transition
+              "
+            >
+              Jelajahi Berita
+            </button>
+          </div>
+
+        </div>
+
+        {/* Judul Berita */}
+        <h1 className="text-3xl font-bold mb-10 text-center dark:text-white">
+          Berita Terbaru
+        </h1>
+
+        {/* Card Berita */}
+        <div className="grid md:grid-cols-2 gap-8">
+
+          {data.map((item: Berita) => (
+            <div
+              key={item.id}
+              className="
+                bg-white
+                dark:bg-slate-800
+                rounded-3xl
+                overflow-hidden
+                shadow-lg
+                hover:scale-105
+                transition
+                duration-300
+              "
+            >
+
+              {/* Gambar */}
+              <img
+                src={item.gambar}
+                alt="berita"
+                className="
+                  w-full
+                  h-64
+                  object-cover
+                "
+              />
+
+              {/* Isi Card */}
+              <div className="p-6">
+
+                <h2 className="text-2xl font-bold dark:text-white">
+                  {item.judul}
+                </h2>
+
+                <p className="mt-4 text-gray-600 dark:text-gray-300 leading-relaxed">
+                  {item.deskripsi}
+                </p>
+
+              </div>
+            </div>
+          ))}
+
+        </div>
+
       </div>
-      <h1 className="text-xl font-bold mb-4 dark:text-white">Berita</h1>
-      <div className="border rounded-2xl p-4">
-      </div>
-
-      {data.map((item: Berita) => (
-  <div
-    key={item.id}
-    className="border p-4 mb-4 rounded-xl bg-white shadow"
-  >
-
-    <img
-      src={item.gambar}
-      alt="berita"
-      className="w-full h-56 object-cover rounded-xl mb-4"
-    />
-
-    <h2 className="font-bold text-xl">
-      {item.judul}
-    </h2>
-
-    <p className="mt-2 dark:text-gray-300">
-      {item.deskripsi}
-    </p>
-  </div>
-  ))}
-    </div>
     </>
   );
 }
