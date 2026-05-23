@@ -19,10 +19,13 @@ export default async function BeritaUser() {
   return (
     <>
     <Menu /> {/* Nav menu */}
-  <div className="text-center pt-24 mb-10">
+    <div className="text-center pt-24 mb-10">
   <h1 className="text-5xl font-extrabold text-slate-800 dark:text-white">
     Portal Berita
   </h1>
+   <p className="mt-4 text-xl text-gray-600 dark:text-gray-300">
+    Informasi Terbaru dan Terpercaya
+  </p>
       <input
   type="text"
   placeholder="Cari berita..."
@@ -33,21 +36,15 @@ export default async function BeritaUser() {
     rounded-xl
     mb-6
     dark:bg-gray-800
-    dark:text-white
-    
+    dark:text-white  
   "
   />
       <div className="mb-4">
-     <p className="text-gray-500 dark:text-gray-300">
-      Informasi terbaru dan terpercaya
-    </p>
-  </div>
-    <div className="mb-4">
-    </div>
+     </div>
+      <div className="mb-4">
+      </div>
       <h1 className="text-xl font-bold mb-4 dark:text-white">Berita</h1>
-
       <div className="border rounded-2xl p-4">
-        
       </div>
 
       {data.map((item: Berita) => (
