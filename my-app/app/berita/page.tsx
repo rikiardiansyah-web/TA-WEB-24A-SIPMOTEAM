@@ -134,23 +134,27 @@ export default async function BeritaUser() {
               />
 
               {/* Isi Card */}
-              <div className="p-8">
+              <div className= "p-8">
 
-        <h2 className="text-3xl font-bold dark:text-white">
-            Informasi desa dan pengelolaan anggaran kini dapat diakses
+        <h2 className="text-4xl font-bold">
+  Membangun Desa yang Lebih Maju
+</h2>
+
+<p className="
+  mt-6
+  text-lg
+  text-gray-200
+  max-w-3xl
+  leading-8
+  text-center
+  font-normal
+  mx-auto
+">
+  Informasi desa dan pengelolaan anggaran kini dapat diakses
   dengan lebih mudah, transparan, dan terpercaya. Bersama
   masyarakat, desa berkembang menuju masa depan yang lebih
   maju dan sejahtera.
-        </h2>
-
-         <p className="
-          mt-4
-          text-gray-600
-          dark:text-gray-300
-          leading-8
-          text-lg
-        ">
-       </p>
+</p>
         <Image
               src="/images/berita2.PNG"
               alt="gambar tambahan"
