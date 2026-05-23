@@ -1,5 +1,3 @@
-"use client";
-
 import Menu from "../components/navbar";
 
 type Berita = {
@@ -23,7 +21,7 @@ export default async function BeritaUser() {
       <Menu />
 
       {/* Container */}
-      <div className="pt-24 px-6 max-w-7xl mx-auto">
+      <div className="pt-24 px-8 max-w-7xl mx-auto">
 
         {/* Heading */}
         <div className="text-center mb-10">
@@ -55,10 +53,8 @@ export default async function BeritaUser() {
             dark:text-white
           "
         />
-
         {/* Hero Section */}
         <div className="mb-16">
-
           <div
             className="
               bg-gradient-to-r
@@ -105,7 +101,7 @@ export default async function BeritaUser() {
         </h1>
 
         {/* Card Berita */}
-        <div className="grid md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 gap-10">
 
           {data.map((item: Berita) => (
             <div
@@ -121,7 +117,6 @@ export default async function BeritaUser() {
                 duration-300
               "
             >
-
               {/* Gambar */}
               <img
                 src={item.gambar}
