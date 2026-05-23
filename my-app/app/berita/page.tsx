@@ -68,7 +68,7 @@ export default async function BeritaUser() {
             "
           >
             <h2 className="text-4xl font-bold">
-               Pesona Desa dan anggaran kegiatan 2026
+               Transpartasi Anggaran Desa 2026
             </h2>
 
             <p className="mt-4 text-lg text-gray-200 max-w-2xl leading-relaxed">
@@ -137,7 +137,10 @@ export default async function BeritaUser() {
               <div className="p-8">
 
         <h2 className="text-3xl font-bold dark:text-white">
-            Pesona Desa Nusantara
+            Informasi desa dan pengelolaan anggaran kini dapat diakses
+  dengan lebih mudah, transparan, dan terpercaya. Bersama
+  masyarakat, desa berkembang menuju masa depan yang lebih
+  maju dan sejahtera.
         </h2>
 
          <p className="
@@ -147,7 +150,6 @@ export default async function BeritaUser() {
           leading-8
           text-lg
         ">
-         {item.deskripsi}
        </p>
         <Image
               src="/images/berita2.PNG"
