@@ -117,18 +117,18 @@ export default async function BeritaUser() {
             shadow-lg
             hover:scale-105
             transition
-            duration-300
+            duration-100
           "
 >
               {/* Gambar */}
               <img 
                 src="/images/berita1.jpg"
                 alt="berita"
-                width={1200}
+                width={1000}
                 height={450}
                 className="
                   w-full
-                  h-[450px]
+                  h-[750px]
                   object-cover
                 "
               />
@@ -169,6 +169,7 @@ export default async function BeritaUser() {
                shadow-xl
   "
 />
+
               </div>
             </div>
           ))}
