@@ -105,31 +105,33 @@ export default async function BeritaUser() {
 
           {data.map((item: Berita) => (
             <div
-              key={item.id}
-              className="
-                bg-white
-                dark:bg-slate-800
-                rounded-3xl
-                overflow-hidden
-                shadow-lg
-                hover:scale-105
-                transition
-                duration-300
-              "
-            >
+  key={item.id}
+  className="
+    max-w-5xl
+    mx-auto
+    bg-white
+    dark:bg-slate-800
+    rounded-3xl
+    overflow-hidden
+    shadow-lg
+    hover:scale-105
+    transition
+    duration-300
+  "
+>
               {/* Gambar */}
               <img
                 src={item.gambar}
                 alt="berita"
                 className="
                   w-full
-                  h-64
+                  h-[450px]
                   object-cover
                 "
               />
 
               {/* Isi Card */}
-              <div className="p-6">
+              <div className="p-8">
 
                 <h2 className="text-2xl font-bold dark:text-white">
                   {item.judul}
