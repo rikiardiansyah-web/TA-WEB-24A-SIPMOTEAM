@@ -68,7 +68,7 @@ export default async function BeritaUser() {
             "
           >
             <h2 className="text-4xl font-bold">
-              Selamat Datang di SIPNO
+               Pesona Desa dan anggaran kegiatan 2026
             </h2>
 
             <p className="mt-4 text-lg text-gray-200 max-w-2xl leading-relaxed">
@@ -137,7 +137,7 @@ export default async function BeritaUser() {
               <div className="p-8">
 
         <h2 className="text-3xl font-bold dark:text-white">
-            {item.judul}
+            Pesona Desa Nusantara
         </h2>
 
          <p className="
@@ -159,7 +159,8 @@ export default async function BeritaUser() {
               h-[350px]
               object-cover
               rounded-2xl
-               mt-6
+               mt-8
+               shadow-xl
   "
 />
               </div>
