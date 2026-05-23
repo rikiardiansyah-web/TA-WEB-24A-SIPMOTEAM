@@ -125,7 +125,7 @@ export default async function BeritaUser() {
                 src="/images/berita1.jpg"
                 alt="berita"
                 width={1000}
-                height={450}
+                height={400}
                 className="
                   w-full
                   h-[750px]
@@ -162,7 +162,7 @@ export default async function BeritaUser() {
               height={500}
               className="
                w-full
-              h-[350px]
+              h-[650px]
               object-cover
               rounded-2xl
                mt-8
