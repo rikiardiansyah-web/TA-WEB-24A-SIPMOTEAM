@@ -133,9 +133,9 @@ export default async function BeritaUser() {
               {/* Isi Card */}
               <div className="p-8">
 
-                <h2 className="text-2xl font-bold dark:text-white">
-                  {item.judul}
-                </h2>
+        <h2 className="text-3xl font-bold dark:text-white">
+            {item.judul}
+        </h2>
 
                 <p className="mt-4 text-gray-600 dark:text-gray-300 leading-relaxed">
                   {item.deskripsi}
