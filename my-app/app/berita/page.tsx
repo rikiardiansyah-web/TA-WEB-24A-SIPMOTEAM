@@ -19,10 +19,10 @@ export default async function BeritaUser() {
   return (
     <>
     <Menu /> {/* Nav menu */}
-  <div className="mb-6">
-      <h1 className="text-4xl font-bold dark:text-white mt-16">
-        Portal Berita
-      </h1>
+  <div className="text-center pt-24 mb-10">
+  <h1 className="text-5xl font-extrabold text-slate-800 dark:text-white">
+    Portal Berita
+  </h1>
       <input
   type="text"
   placeholder="Cari berita..."
