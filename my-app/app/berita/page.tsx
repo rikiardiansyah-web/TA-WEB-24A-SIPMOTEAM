@@ -1,4 +1,5 @@
 import Menu from "../components/navbar";
+import Image from "next/image";
 
 type Berita = {
   id: number;
@@ -120,9 +121,11 @@ export default async function BeritaUser() {
   "
 >
               {/* Gambar */}
-              <img
-                src={item.gambar}
+              <img 
+                src="/images/berita1.jpg"
                 alt="berita"
+                width={1200}
+                height={450}
                 className="
                   w-full
                   h-[450px]
