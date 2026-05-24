@@ -98,7 +98,7 @@ export default async function BeritaUser() {
 
         {/* Judul Berita */}
         <h1 className="text-3xl font-bold mb-10 text-center dark:text-white">
-          Berita Terbaru
+          Bersama Masyarakat Desa Berkembang Dan Maju 
         </h1>
 
         {/* Card Berita */}
@@ -125,7 +125,7 @@ export default async function BeritaUser() {
                 src="/images/berita1.jpg"
                 alt="berita"
                 width={1000}
-                height={400}
+                height={500}
                 className="
                   w-full
                   h-[750px]
