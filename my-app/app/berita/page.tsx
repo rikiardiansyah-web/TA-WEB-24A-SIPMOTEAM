@@ -106,12 +106,10 @@ export default async function BeritaUser() {
 
           {data.map((item: Berita) => (
             <div
-          key={item.id}
-          className="
+            key={item.id}
+            className="
             max-w-5xl
             mx-auto
-            bg-white
-            dark:bg-slate-800
             rounded-3xl
             overflow-hidden
             shadow-lg
@@ -119,60 +117,48 @@ export default async function BeritaUser() {
             transition
             duration-100
           "
->
-              {/* Gambar */}
-              <img 
-                src="/images/berita1.jpg"
-                alt="berita"
-                width={1000}
-                height={500}
-                className="
-                  w-full
-                  h-[750px]
-                  object-cover
-                "
-              />
+          >
 
-              {/* Isi Card */}
-              <div className= "p-8">
+          {/* Gambar dari database */}
+          
+            <img
+            src={item.gambar}
+            alt={item.judul}
+            className="
+            w-full
+            h-[500px]
+            object-cover
+            "
+            />
 
-        <h2 className="text-4xl font-bold text-center ">
-  Membangun Desa yang Lebih Maju
-</h2>
+          {/* Isi */}
+            <div className="p-8">
 
-          <p className="
-            mt-6
-            text-lg
-            text-gray-700
-            max-w-3xl
-            leading-8
-            text-center
-            font-normal
-            mx-auto
-          ">
-            Informasi desa dan pengelolaan anggaran kini dapat diakses
-            dengan lebih mudah, transparan, dan terpercaya. Bersama
-            masyarakat, desa berkembang menuju masa depan yang lebih
-            maju dan sejahtera.
-          </p>
-        <Image
-              src="/images/berita2.PNG"
-              alt="gambar tambahan"
-              width={1200}
-              height={500}
-              className="
-               w-full
-              h-[650px]
-              object-cover
-              rounded-2xl
-               mt-8
-               shadow-xl
-  "
-/>
+           <h2 className="text-4xl font-bold text-center dark:text-white">
+           {item.judul}
+          </h2>
 
-              </div>
-            </div>
-          ))}
+          <p
+          className="
+          mt-6
+          text-lg
+          max-w-3xl
+          leading-8
+          text-center
+          font-normal
+          mx-auto
+        "
+      >
+        {item.deskripsi}
+        </p>
+
+        <p className="text-sm text-center mt-6 text-gray-400">
+        {new Date(item.createdAt).toLocaleDateString("id-ID")}
+        </p>
+
+        </div>
+        </div>
+        ))}
 
         </div>
 
