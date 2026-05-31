@@ -30,14 +30,14 @@ export async function POST(req: Request) {
     const data = await prisma.warga.create({
       data: {
         nik: body.nik,
-        username: body.username,
         nama: body.nama,
-        email: body.email,
-        password: body.password,
         noTelepon: body.noTelepon,
         alamat: body.alamat,
         JenisKelamin: body.JenisKelamin,
         status: body.status,
+        username: body.username,
+        email: body.email,
+        password: body.password,
       },
     });
 

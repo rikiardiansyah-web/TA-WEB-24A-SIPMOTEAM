@@ -1,59 +1,103 @@
-//riki
 "use client";
+
 import "./login.css";
 import Link from "next/link";
 import { useState } from "react";
 
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
+  const [step, setStep] = useState(1);
+
   return (
     <div className="form-container">
-      <h2>{isLogin ? "Login" : "Register"}</h2>
+      <h2>
+        {isLogin
+          ? "Login"
+          : step === 1
+          ? "Verifikasi Warga"
+          : "Buat Akun"}
+      </h2>
 
-      {!isLogin && (
+      {/* LOGIN */}
+      {isLogin ? (
         <>
           <div className="input-box">
-            <input type="text" placeholder="Nama Lengkap" required />
-            <span>Nama Lengkap</span>
-          </div>
-
-          <div className="input-box">
-            <input type="text" placeholder="Username" required />
+            <input type="text" required />
             <span>Username</span>
           </div>
 
           <div className="input-box">
-            <input type="text" placeholder="No HP" required />
-            <span>No HP</span>
+            <input type="password" required />
+            <span>Password</span>
           </div>
+
+          <Link href="/" className="submit-btn">
+            Login
+          </Link>
+        </>
+      ) : (
+        <>
+          {/* STEP 1 : VERIFIKASI */}
+          {step === 1 && (
+            <>
+              <div className="input-box">
+                <input type="text" required />
+                <span>NIK</span>
+              </div>
+
+              <div className="input-box">
+                <input type="text" required />
+                <span>Nama Lengkap</span>
+              </div>
+
+              <button
+                className="submit-btn"
+                onClick={() => setStep(2)}
+              >
+                Verifikasi
+              </button>
+            </>
+          )}
+
+          {/* STEP 2 : BUAT AKUN */}
+          {step === 2 && (
+            <>
+              <div className="input-box">
+                <input type="text" required />
+                <span>Username</span>
+              </div>
+
+              <div className="input-box">
+                <input type="password" required />
+                <span>Password</span>
+              </div>
+
+              <div className="input-box">
+                <input type="password" required />
+                <span>Konfirmasi Password</span>
+              </div>
+
+              <button className="submit-btn">
+                Daftar
+              </button>
+            </>
+          )}
         </>
       )}
 
-      <div className="input-box">
-        <input type="numerik" placeholder="NIK" required />
-        <span>NIK</span>
-      </div>
+      <p className="switch-text">
+        {isLogin
+          ? "Belum punya akun?"
+          : "Sudah punya akun?"}
 
-      <div className="input-box">
-        <input type="text" placeholder="Username" required />
-        <span>Username</span>
-      </div>
-
-      <div className="input-box">
-        <input type="password" placeholder="Password" required />
-        <span>Password</span>
-      </div>
-
-      <Link href="/" className="submit-btn">
-        {isLogin ? "Login" : "Register"}
-      </Link>
-      <p>
-        {isLogin ? "Belum punya akun?" : "Sudah punya akun?"}
         <span
-          onClick={() => setIsLogin}
-          >
-          {isLogin ? "Register" : "Login"}
-         </span>
+          onClick={() => {
+            setIsLogin(!isLogin);
+            setStep(1);
+          }}
+        >
+          {isLogin ? " Register" : " Login"}
+        </span>
       </p>
     </div>
   );

@@ -15,6 +15,7 @@ import {
 
 import Footadmin from "./component/footadmin";
 import NavAdmin from "./component/navadmin";
+import {useRouter} from "next/navigation";
 
 type Pesan = {
   id: number;
@@ -27,7 +28,7 @@ type Pesan = {
 export default function AdminPage() {
   const [menu, setMenu] = useState("pesan");
   const [open, setOpen] = useState(false);
-
+  const router = useRouter();
   const [pesan, setPesan] = useState<Pesan[]>([]);
 
   useEffect(() => {
@@ -118,7 +119,7 @@ export default function AdminPage() {
               </button>
               <button
                 onClick={() => {
-                  setMenu("berita");
+                  router.push("/admin/beritaadmin");
                   setOpen(false);
                 }}
                 className="

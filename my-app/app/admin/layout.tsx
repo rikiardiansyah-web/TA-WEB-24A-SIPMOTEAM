@@ -12,8 +12,8 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   return (
-      <body className="min-h-full flex flex-col">
+      <div className="min-h-full flex flex-col">
         {children}
-      </body>
+      </div>
   );
 }

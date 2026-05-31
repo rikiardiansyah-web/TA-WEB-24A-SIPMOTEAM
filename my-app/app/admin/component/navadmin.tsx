@@ -40,10 +40,6 @@ export default function NavAdmin() {
           Home
         </Link>
 
-        <Link href="/admin/beritaadmin" className={linkClass("/admin/beritaadmin")}>
-          Berita
-        </Link>
-
         <Link href="/profile" className={linkClass("/profile")}>
           Profile
         </Link>

@@ -4,10 +4,11 @@ import { useEffect, useState } from "react";
 
 type Warga = {
   nik: number;
-  username: string;
+  username?: string;
   nama: string;
-  email: string;
-  noTelepon: string;
+  email?: string;
+  noTelepon?: string;
+  password?: string;
   alamat?: string;
   JenisKelamin?: string;
   status?: string;
@@ -16,13 +17,11 @@ type Warga = {
 export default function DataWarga() {
 
   const [data, setData] = useState<Warga[]>([]);
+  const [search, setSearch] = useState("");
 
   const [form, setForm] = useState({
     nik: "",
-    username: "",
     nama: "",
-    email: "",
-    password: "",
     noTelepon: "",
     alamat: "",
     JenisKelamin: "",
@@ -64,7 +63,7 @@ export default function DataWarga() {
 
         body: JSON.stringify({
           ...form,
-          nik: Number(form.nik),
+          nik: form.nik,
         }),
       });
 
@@ -77,10 +76,7 @@ export default function DataWarga() {
 
       setForm({
         nik: "",
-        username: "",
         nama: "",
-        email: "",
-        password: "",
         noTelepon: "",
         alamat: "",
         JenisKelamin: "",
@@ -93,6 +89,11 @@ export default function DataWarga() {
       console.error(error);
     }
   };
+
+  const filteredData = data.filter((item) =>
+    item.nama.toLowerCase().includes(search.toLowerCase()) ||
+    item.nik.toString().toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <div className="space-y-8">
@@ -118,40 +119,10 @@ export default function DataWarga() {
 
           <input
             type="text"
-            placeholder="Username"
-            value={form.username}
-            onChange={(e) =>
-              setForm({ ...form, username: e.target.value })
-            }
-            className="border p-3 rounded-xl"
-          />
-
-          <input
-            type="text"
             placeholder="Nama Lengkap"
             value={form.nama}
             onChange={(e) =>
               setForm({ ...form, nama: e.target.value })
-            }
-            className="border p-3 rounded-xl"
-          />
-
-          <input
-            type="email"
-            placeholder="Email"
-            value={form.email}
-            onChange={(e) =>
-              setForm({ ...form, email: e.target.value })
-            }
-            className="border p-3 rounded-xl"
-          />
-
-          <input
-            type="password"
-            placeholder="Password"
-            value={form.password}
-            onChange={(e) =>
-              setForm({ ...form, password: e.target.value })
             }
             className="border p-3 rounded-xl"
           />
@@ -218,30 +189,59 @@ export default function DataWarga() {
 
       {/* TABLE */}
       <div className="bg-white dark:bg-[#1e293b] p-6 rounded-3xl shadow-md overflow-auto">
+        <input
+          type="text"
+          placeholder="Cari warga..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="
+          w-full
+          border
+        border-gray-300
+        dark:border-slate-600
+          p-3
+          rounded-xl
+          mb-6
+          focus:outline-none
+          focus:ring-2
+        focus:ring-blue-500
+       "
+      />
 
         <h1 className="text-2xl font-bold mb-6 text-[#004467] dark:text-white">
           Data Warga
         </h1>
 
+        <div className="overflow-x-auto">
         <table className="w-full">
 
           <thead>
             <tr className="border-b">
               <th className="text-left p-3">NIK</th>
               <th className="text-left p-3">Nama</th>
+              <th className="text-left p-3">Email</th>
+              <th className="text-left p-3">No Telepon</th>
+              <th className="text-left p-3">Username</th>
+              <th className="text-left p-3">Password</th>
+              <th className="text-left p-3">Alamat</th>
               <th className="text-left p-3">Jenis Kelamin</th>
               <th className="text-left p-3">Status</th>
             </tr>
           </thead>
 
           <tbody>
-            {data.map((item) => (
+            {filteredData.map((item) => (
               <tr
                 key={item.nik}
                 className="border-b hover:bg-gray-100 dark:hover:bg-slate-700"
               >
                 <td className="p-3">{item.nik}</td>
                 <td className="p-3">{item.nama}</td>
+                <td className="p-3">{item.email}</td>
+                <td className="p-3">{item.noTelepon}</td>
+                <td className="p-3">{item.username}</td>
+                <td className="p-3">{item.password}</td>
+                <td className="p-3">{item.alamat}</td>
                 <td className="p-3">{item.JenisKelamin}</td>
                 <td className="p-3">{item.status}</td>
               </tr>
@@ -249,6 +249,7 @@ export default function DataWarga() {
           </tbody>
 
         </table>
+        </div>
       </div>
     </div>
   );

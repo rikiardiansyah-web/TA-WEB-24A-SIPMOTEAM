@@ -26,7 +26,7 @@ export async function POST(req: Request) {
 
     const cekWarga = await prisma.warga.findUnique({
       where: {
-        nik: Number(body.nik),
+        nik: body.nik,
       },
     });
 
@@ -43,8 +43,8 @@ export async function POST(req: Request) {
 
     const data = await prisma.pesan.create({
       data: {
-        nik: Number(body.nik),
-        nama: cekWarga.name,
+        nik: body.nik,
+        nama: cekWarga.nama,
         isi: body.isi,
       },
     });
