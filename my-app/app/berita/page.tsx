@@ -131,7 +131,7 @@ export default function BeritaUser() {
             <div
               key={item.id}
               className="
-                max-w-5xl
+                max-w-3xl
                 mx-auto
                 rounded-3xl
                 overflow-hidden

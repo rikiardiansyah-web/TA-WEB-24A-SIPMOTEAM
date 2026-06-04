@@ -7,13 +7,21 @@ import "./nav.css";
 
 export default function NavAdmin() {
   const pathname = usePathname();
-  const [darkMode, setdarkMode] = useState(false);
+  const [darkMode, setdarkMode] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    return localStorage.getItem("theme") === "dark";
+  });
   const [menuOpen, setMenuOpen] = useState(false);
 
-  useEffect(() => {
-    document.body.classList.toggle("dark", darkMode);
-    document.body.classList.toggle("light", !darkMode);
-  }, [darkMode]);
+useEffect(() => {
+  document.body.classList.toggle("dark", darkMode);
+  document.body.classList.toggle("light", !darkMode);
+
+  localStorage.setItem(
+    "theme",
+    darkMode ? "dark" : "light"
+  );
+}, [darkMode]);
 
   const linkClass = (path: string) =>
     `relative px-3 py-2 transition-all duration-300

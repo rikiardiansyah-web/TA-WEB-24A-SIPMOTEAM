@@ -30,6 +30,7 @@ model warga {
   alamat    String?
   JenisKelamin String?
   status    String? //aktif, pindah, dll
+  fotoProfil String?
 }
 
 model Pesan {
