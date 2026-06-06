@@ -5,17 +5,38 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import "./nav.css";
 
+type Warga = {
+  nik: string;
+  nama: string;
+  username?: string;
+  email?: string;
+  fotoProfil?: string;
+};
+
 export default function NavAdmin() {
   const pathname = usePathname();
-  const [darkMode, setdarkMode] = useState<boolean>(() => {
+
+  const [darkMode, setDarkMode] = useState<boolean>(() => {
     if (typeof window === "undefined") return false;
     return localStorage.getItem("theme") === "dark";
   });
   const [menuOpen, setMenuOpen] = useState(false);
 
-useEffect(() => {
-  document.body.classList.toggle("dark", darkMode);
-  document.body.classList.toggle("light", !darkMode);
+  const [user, setUser] = useState<Warga | null>(() => {
+    if (typeof window === "undefined") return null;
+    return JSON.parse(localStorage.getItem("user") || "null");
+  });
+
+  useEffect(() => {
+  document.body.classList.toggle(
+    "dark",
+    darkMode
+  );
+
+  document.body.classList.toggle(
+    "light",
+    !darkMode
+  );
 
   localStorage.setItem(
     "theme",
@@ -35,19 +56,39 @@ useEffect(() => {
          : "after:scale-x-0 hover:after:scale-x-100"
      }`;
 
+  const inisial =
+    user?.nama
+      ?.split(" ")
+      .map((item: string) => item[0])
+      .join("")
+      .toUpperCase() || "?";
+
   return (
     <div className="navbar flex items-center justify-between px-4">
+
+      {/* LOGO */}
       <div className="navleft">
         <span className="text">SIPMO</span>
       </div>
 
       {/* MENU */}
-      <div className={`navright flex gap-4 ${menuOpen ? "open" : ""}`}>
-        <Link href="/admin" className={linkClass("/admin")}>
+      <div
+        className={`navright flex gap-4 ${
+          menuOpen ? "open" : ""
+        }`}
+      >
+        <Link
+          href="/"
+          className={linkClass("/")}
+        >
           Home
         </Link>
-        <Link href="/about" className={linkClass("/about")}>
-          About
+
+        <Link
+          href="/berita"
+          className={linkClass("/berita")}
+        >
+          Berita
         </Link>
       </div>
 
@@ -59,13 +100,59 @@ useEffect(() => {
         {menuOpen ? "X" : "☰"}
       </button>
 
-      {/* DARK MODE */}
-      <button
-        onClick={() => setdarkMode(!darkMode)}
-        className="toggle-btn ml-2"
-      >
-        {darkMode ? "Light Mode" : "Dark Mode"}
-      </button>
+      {/* KANAN */}
+      <div className="flex items-center gap-3">
+
+        {/* DARK MODE */}
+          <button
+            onClick={() =>
+              setDarkMode(!darkMode)
+            }
+            className="toggle-btn"
+          >
+            {darkMode
+              ? "☀ Light"
+              : "☾ Dark"}
+          </button>
+
+        {/* FOTO PROFIL */}
+        <Link href="/profile">
+
+          {user?.fotoProfil ? (
+            <img
+              src={user.fotoProfil}
+              alt="Profile"
+              className="
+                w-10
+                h-10
+                rounded-full
+                object-cover
+                border-2
+                border-cyan-400
+              "
+            />
+          ) : (
+            <div
+              className="
+                w-10
+                h-10
+                rounded-full
+                bg-cyan-600
+                text-white
+                flex
+                items-center
+                justify-center
+                font-bold
+                cursor-pointer
+              "
+            >
+              {inisial}
+            </div>
+          )}
+
+        </Link>
+
+      </div>
     </div>
   );
 }

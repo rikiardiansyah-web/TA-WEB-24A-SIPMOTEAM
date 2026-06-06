@@ -121,36 +121,92 @@ export default function ProfilePage() {
   return (
     <>
     <Navbar />
-    <div className="min-h-screen bg-gray-100 dark:bg-slate-900 p-8 transition-all">
+    <div className="min-h-screen p-8 transition-all">
 
-      <div className="max-w-3xl mx-auto bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-8">
+      <div className="glass-card max-w-2xl mx-auto p-8">
 
         {/* FOTO PROFIL */}
-        <div className="flex flex-col items-center mb-8">
+<div className="flex flex-col items-center mb-8">
 
-          {user.fotoProfil ? (
-            <img
-              src={user.fotoProfil}
-              alt="Profile"
-              className="w-32 h-32 rounded-full object-cover"
-            />
-          ) : (
-            <div
-              className="
-                w-32 h-32
-                rounded-full
-                bg-[#004467]
-                text-white
-                flex
-                items-center
-                justify-center
-                text-4xl
-                font-bold
-              "
-            >
-              {inisial}
-            </div>
-          )}
+  {user.fotoProfil ? (
+    <>
+      <img
+        src={user.fotoProfil}
+        alt="Profile"
+        className="w-32 h-32 rounded-full object-cover"
+      />
+
+      {editMode && (
+        <label className="mt-3 cursor-pointer text-cyan-500 text-sm">
+          Ubah Foto Profil
+          <input
+            type="file"
+            className="hidden"
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+
+              if (!file) return;
+
+              const reader = new FileReader();
+
+              reader.onloadend = () => {
+                setUser({
+                  ...user,
+                  fotoProfil: reader.result as string,
+                });
+              };
+
+              reader.readAsDataURL(file);
+            }}
+          />
+        </label>
+      )}
+    </>
+  ) : (
+    <>
+      <div
+        className="
+          w-32 h-32
+          rounded-full
+          bg-[#004467]
+          text-white
+          flex
+          items-center
+          justify-center
+          text-4xl
+          font-bold
+        "
+      >
+        {inisial}
+      </div>
+
+      {editMode && (
+        <label className="mt-3 cursor-pointer text-cyan-500 text-sm">
+          Upload Foto Profil
+          <input
+            type="file"
+            className="hidden"
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+
+              if (!file) return;
+
+              const reader = new FileReader();
+
+              reader.onloadend = () => {
+                setUser({
+                  ...user,
+                  fotoProfil: reader.result as string,
+                });
+              };
+
+              reader.readAsDataURL(file);
+            }}
+          />
+        </label>
+      )}
+    </>
+  )}
 
           <h1 className="text-2xl font-bold mt-4">
             {user.nama}
@@ -172,7 +228,7 @@ export default function ProfilePage() {
         </div>
 
         {/* DATA */}
-        <div className="grid md:grid-cols-2 gap-5">
+        <div className="flex flex-col gap-5">
 
           <div>
             <label className="font-semibold">
@@ -181,7 +237,7 @@ export default function ProfilePage() {
             <input
               value={user.nik}
               readOnly
-              className="w-full border p-3 rounded-xl mt-2"
+              className="sipmo-input mt-2"
             />
           </div>
 
@@ -192,7 +248,7 @@ export default function ProfilePage() {
             <input
               value={user.nama}
               readOnly
-              className="w-full border p-3 rounded-xl mt-2"
+              className="sipmo-input mt-2"
             />
           </div>
 
@@ -206,7 +262,7 @@ export default function ProfilePage() {
               onChange={(e) =>
                 setUser({ ...user, email: e.target.value })
               }
-              className="w-full border p-3 rounded-xl mt-2"
+              className="sipmo-input mt-2"
             />
           </div>
 
@@ -220,7 +276,7 @@ export default function ProfilePage() {
               onChange={(e) =>
                 setUser({ ...user, noTelepon: e.target.value })
               }
-              className="w-full border p-3 rounded-xl mt-2"
+              className="sipmo-input mt-2"
             />
           </div>
 
@@ -234,7 +290,7 @@ export default function ProfilePage() {
               onChange={(e) =>
                 setUser({ ...user, username: e.target.value })
               }
-              className="w-full border p-3 rounded-xl mt-2"
+              className="sipmo-input mt-2"
             />
           </div>
 
@@ -248,7 +304,7 @@ export default function ProfilePage() {
               onChange={(e) =>
                 setUser({ ...user, password: e.target.value })
               }
-              className="w-full border p-3 rounded-xl mt-2"
+              className="sipmo-input mt-2"
             />
           </div>
 
@@ -259,7 +315,7 @@ export default function ProfilePage() {
             <input
               value={user.alamat || ""}
               readOnly
-              className="w-full border p-3 rounded-xl mt-2"
+              className="sipmo-input mt-2"
             />
           </div>
 
@@ -270,7 +326,7 @@ export default function ProfilePage() {
             <input
               value={user.JenisKelamin || ""}
               readOnly
-              className="w-full border p-3 rounded-xl mt-2"
+              className="sipmo-input mt-2"
             />
           </div>
 

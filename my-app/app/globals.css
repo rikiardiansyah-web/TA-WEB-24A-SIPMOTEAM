@@ -20,17 +20,138 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
 
-body.dark {
-  background-color: #0d0d0d;
-  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+
+  transition:
+    background 0.4s ease,
+    color 0.4s ease;
 }
 
 body.light {
-  background-color: #ffffff;
-  color: black;
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 0%,
+      #f7fcfd 100%
+    );
+
+  color: #111827;
+}
+
+body.dark {
+  background:
+    linear-gradient(
+      135deg,
+      #071018 0%,
+      #0d1620 100%
+    );
+
+  color: white;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(0,255,255,0.25),
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(0,255,255,0.25),
+      transparent 45%
+    );
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(0,255,255,0.05),
+      transparent 70%
+    );
+  filter: blur(120px);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 24px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+body.dark .glass-card {
+  background: rgba(17, 24, 39, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.35);
+}
+
+.section-title {
+  color: #004467;
+  font-weight: 700;
+}
+
+body.dark .section-title {
+  color: #4dd6ff;
+}
+
+.sipmo-input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  background: rgba(255,255,255,0.7);
+  transition: 0.3s;
+}
+
+.sipmo-input:focus {
+  outline: none;
+  border-color: #00c8ff;
+  box-shadow:
+    0 0 0 4px rgba(0,200,255,0.15);
+}
+
+body.dark .sipmo-input {
+  background: rgba(30,41,59,0.8);
+  border-color: #334155;
+  color: white;
+}
+
+.sipmo-btn {
+  background: linear-gradient(
+    90deg,
+    #00d4ff,
+    #00ffcc
+  );
+
+  color: #002233;
+  font-weight: 700;
+  border-radius: 12px;
+  padding: 12px 20px;
+  transition: 0.3s;
+}
+
+.sipmo-btn:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 10px 20px rgba(0,255,255,.2);
 }
