@@ -83,40 +83,52 @@ export default function ProfilePage() {
     .join("")
     .toUpperCase();
 
-    const simpanProfile = async () => {
-  try {
-    const res = await fetch("/api/profile", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    });
+  const simpanProfile = async () => {
+    try {
+      const res = await fetch("/api/profile", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    if (data.success) {
-      alert("Profil berhasil diperbarui");
+      if (data.success) {
+        alert("Profil berhasil diperbarui");
 
-      setUser(data.data);
+        setUser(data.data);
 
-      localStorage.setItem(
-        "user",
-        JSON.stringify(data.data)
-      );
+        localStorage.setItem(
+          "user",
+          JSON.stringify(data.data)
+        );
 
-      setEditMode(false);
+        setEditMode(false);
+      } else {
+        alert(data.error);
+      }
+    } catch (error) {
+      console.error(error);
 
-    } else {
-      alert(data.error);
+      alert("Gagal update profil");
     }
+  };
 
-  } catch (error) {
-    console.error(error);
+  const logout = () => {
+    const konfirmasi = confirm(
+      "Yakin ingin keluar dari akun?"
+    );
 
-    alert("Gagal update profil");
-  }
-};
+    if (!konfirmasi) return;
+
+    localStorage.removeItem("user");
+
+    alert("Berhasil logout");
+
+    window.location.href = "/login";
+  };
 
   return (
     <>
@@ -348,6 +360,22 @@ export default function ProfilePage() {
             Simpan Perubahan
         </button>
         )}
+        <button
+            onClick={logout}
+            className="
+            mt-4
+            w-full
+            bg-red-600
+            hover:bg-red-700
+            text-white
+            py-3
+            rounded-xl
+            font-semibold
+            transition
+            "
+        >
+            Logout
+        </button>
 
       </div>
 

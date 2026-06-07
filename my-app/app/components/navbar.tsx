@@ -21,28 +21,20 @@ export default function NavAdmin() {
     return localStorage.getItem("theme") === "dark";
   });
   const [menuOpen, setMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
-  const [user, setUser] = useState<Warga | null>(() => {
-    if (typeof window === "undefined") return null;
-    return JSON.parse(localStorage.getItem("user") || "null");
-  });
-
+  const user: Warga | null =
+    mounted && typeof window !== "undefined"
+    ? JSON.parse(
+        localStorage.getItem("user") || "null"
+      )
+    : null;
+  
   useEffect(() => {
-  document.body.classList.toggle(
-    "dark",
-    darkMode
-  );
-
-  document.body.classList.toggle(
-    "light",
-    !darkMode
-  );
-
-  localStorage.setItem(
-    "theme",
-    darkMode ? "dark" : "light"
-  );
-}, [darkMode]);
+  setTimeout(() => {
+    setMounted(true);
+  }, 0);
+}, []);
 
   const linkClass = (path: string) =>
     `relative px-3 py-2 transition-all duration-300
@@ -62,6 +54,23 @@ export default function NavAdmin() {
       .map((item: string) => item[0])
       .join("")
       .toUpperCase() || "?";
+
+  useEffect(() => {
+  document.body.classList.toggle(
+    "dark",
+    darkMode
+  );
+
+  document.body.classList.toggle(
+    "light",
+    !darkMode
+  );
+
+  localStorage.setItem(
+    "theme",
+    darkMode ? "dark" : "light"
+  );
+}, [darkMode]);
 
   return (
     <div className="navbar flex items-center justify-between px-4">
@@ -115,44 +124,60 @@ export default function NavAdmin() {
               : "☾ Dark"}
           </button>
 
-        {/* FOTO PROFIL */}
-        <Link href="/profile">
+{user ? (
+  <Link href="/profile">
 
-          {user?.fotoProfil ? (
-            <img
-              src={user.fotoProfil}
-              alt="Profile"
-              className="
-                w-10
-                h-10
-                rounded-full
-                object-cover
-                border-2
-                border-cyan-400
-              "
-            />
-          ) : (
-            <div
-              className="
-                w-10
-                h-10
-                rounded-full
-                bg-cyan-600
-                text-white
-                flex
-                items-center
-                justify-center
-                font-bold
-                cursor-pointer
-              "
-            >
-              {inisial}
-            </div>
-          )}
-
-        </Link>
-
+    {user.fotoProfil ? (
+      <img
+        src={user.fotoProfil}
+        alt="Profile"
+        className="
+          w-10
+          h-10
+          rounded-full
+          object-cover
+          border-2
+          border-cyan-400
+        "
+      />
+    ) : (
+      <div
+        className="
+          w-10
+          h-10
+          rounded-full
+          bg-cyan-600
+          text-white
+          flex
+          items-center
+          justify-center
+          font-bold
+          cursor-pointer
+        "
+      >
+        {inisial}
       </div>
+    )}
+
+  </Link>
+) : (
+  <Link href="/login">
+    <div
+      className="
+        px-3
+        py-2
+        rounded-xl
+        bg-cyan-600
+        text-white
+        text-sm
+        font-semibold
+      "
+    >
+      Login
     </div>
-  );
+  </Link>
+)}
+</div>
+</div>
+);
 }

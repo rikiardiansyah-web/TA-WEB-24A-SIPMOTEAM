@@ -7,12 +7,20 @@ import "./navadmin.css";
 
 export default function NavAdmin() {
   const pathname = usePathname();
-  const [darkMode, setdarkMode] = useState(false);
+
+  const [darkMode, setDarkMode] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return localStorage.getItem("theme") === "dark";
+  });
   const [menuOpen, setMenuOpen] = useState(false);
 
+  // sync theme global (PAKAI BODYY BIAR SAMA DENGAN USER)
   useEffect(() => {
-  document.documentElement.classList.toggle("dark", darkMode);
-}, [darkMode]);
+    document.body.classList.toggle("dark", darkMode);
+    document.body.classList.toggle("light", !darkMode);
+
+    localStorage.setItem("theme", darkMode ? "dark" : "light");
+  }, [darkMode]);
 
   const linkClass = (path: string) =>
     `relative px-3 py-2 transition-all duration-300
@@ -27,15 +35,14 @@ export default function NavAdmin() {
      }`;
 
   return (
-    <div className="navbar flex items-center justify-between px-4">
+    <div className="navbar">
 
-      {/* LEFT */}
       <div className="navleft">
-        <span className="text">SIPMO</span>
+        <span className="text">SIPMO ADMIN</span>
       </div>
 
-      {/* MENU */}
-      <div className={`navright flex gap-4 ${menuOpen ? "open" : ""}`}>
+      <div className={`navright ${menuOpen ? "open" : ""}`}>
+
         <Link href="/admin" className={linkClass("/admin")}>
           Home
         </Link>
@@ -43,23 +50,23 @@ export default function NavAdmin() {
         <Link href="/profile" className={linkClass("/profile")}>
           Profile
         </Link>
+
+        <button
+          onClick={() => setDarkMode(!darkMode)}
+          className="toggle-btn"
+        >
+          {darkMode ? "☀ Light" : "☾ Dark"}
+        </button>
+
       </div>
 
-      {/* HAMBURGER */}
       <button
-        className="hamburger md:hidden"
+        className="hamburger"
         onClick={() => setMenuOpen(!menuOpen)}
       >
-        {menuOpen ? "X" : "☰"}
+        {menuOpen ? "✕" : "☰"}
       </button>
 
-      {/* DARK MODE */}
-      <button
-        onClick={() => setdarkMode(!darkMode)}
-        className="toggle-btn ml-2"
-      >
-        {darkMode ? "Light Mode" : "Dark Mode"}
-      </button>
     </div>
   );
 }

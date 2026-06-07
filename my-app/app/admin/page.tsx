@@ -52,7 +52,7 @@ export default function AdminPage() {
     <>
       <NavAdmin />
 
-      <div className="flex bg-gray-100 dark:bg-[#0f172a] min-h-screen pt-20">
+      <div className="flex min-h-screen pt-[70px] bg-gradient-to-br from-cyan-100 via-white to-sky-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
         <button
           className="
             md:hidden fixed top-24 left-4 z-50
@@ -65,21 +65,21 @@ export default function AdminPage() {
         </button>
         <aside
           className={`
-            fixed top-0 left-0 z-40
-            h-screen w-72
-            bg-[#004467]
+            sticky
+            min-h-screen w-72
+            bg-gradient-to-b
+            from-[#00334d]
+            via-[#004467]
+            to-[#005b87]
+            border-r border-white/20
             text-white
             shadow-2xl
-
+            hidden md:block
             transform transition-transform duration-300
-
-            ${open ? "translate-x-0" : "-translate-x-full"}
-
-            md:translate-x-0
           `}
         >
 
-          <div className="p-6 mt-20">
+          <div className="p-6 mt-4">
 
             <h1 className="text-3xl font-bold mb-10">
               SIPMO Admin
@@ -187,7 +187,7 @@ export default function AdminPage() {
         </aside>
 
 
-        <main className="flex-1 md:ml-72 p-5 md:p-10">
+        <main className="flex-1 p-10 md:p-10">
           {menu === "pesan" && (
             <div>
 
