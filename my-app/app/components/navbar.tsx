@@ -16,10 +16,11 @@ type Warga = {
 export default function NavAdmin() {
   const pathname = usePathname();
 
-  const [darkMode, setDarkMode] = useState<boolean>(() => {
-    if (typeof window === "undefined") return false;
-    return localStorage.getItem("theme") === "dark";
-  });
+  const [darkMode, setDarkMode] = useState(false);
+  useEffect(() => {
+    const theme = localStorage.getItem("theme") === "dark";
+    setDarkMode(theme);
+  }, []);
   const [menuOpen, setMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
