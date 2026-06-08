@@ -17,28 +17,35 @@ type Berita = {
 
 export default function Home() {
   const [open, setOpen] = useState(false);
-  const [nik, setNik] = useState("");
   const [pesan, setPesan] = useState("");
   const [loading, setLoading] = useState(false);
   const [notifPesan, setNotifPesan] = useState(0);
   const [berita, setBerita] = useState<Berita[]>([]);
 
   const kirimPesan = async () => {
-  if (!nik || !pesan) {
-    alert("Isi semua field");
-    return;
-  }
+    const user = JSON.parse(localStorage.getItem("user") || "null");
+
+    if (!user) {
+      alert("Silahkan login terlebih dahulu");
+      window.location.href = "/login";
+      return;
+    }
+
+    if (!pesan) {
+      alert("Pesan tidak boleh kosong");
+      return;
+    }
 
   try {
     setLoading(true);
 
-    const res = await fetch("/api/pesan", {
+    const res = await fetch("/api/chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        nik,
+        nik: user.nik,
         isi: pesan,
       }),
     });
@@ -52,7 +59,6 @@ export default function Home() {
 
     alert("Pesan berhasil dikirim");
 
-    setNik("");
     setPesan("");
     setOpen(false);
 
@@ -107,7 +113,16 @@ useEffect(() => {
         </a>
       </div>
     <button 
-    onClick={() => setOpen(true)}
+    onClick={() => {
+      const user = JSON.parse(
+        localStorage.getItem("user") || "null"
+      );
+      if (!user) {
+        window.location.href = "/login";
+        return;
+      }
+      setOpen(true);
+    }}
     className="px-50 py-2 rounded-full bg-blue-800 text-white hover:bg-blue-300 transition">
       Berikan Saranmu
     </button>
@@ -125,14 +140,6 @@ useEffect(() => {
       <h2 className={styles.modalTitle}>
         Kirim Masukan
       </h2>
-
-      <input
-        type="text"
-        placeholder="Masukkan NIK / Nama"
-        className={styles.input}
-        value={nik}
-        onChange={(e) => setNik(e.target.value)}
-      />
       <textarea
         placeholder="Kirimkan Masukanmu Disini..."
         className={styles.textarea}
@@ -164,24 +171,46 @@ useEffect(() => {
       Berita
     </button>
   </Link>
-  <Link href="/beranda">
-    <button className="px-5 py-2 rounded-full bg-blue-900 text-white hover:bg-yellow-600 transition">
-    Beranda
-    </button>
-  </Link>
-  <Link href="/riwayatpesan">
-    <button className="relative px-5 py-2 rounded-full bg-red-800 text-white hover:bg-red-600 transition">
+  <button
+  onClick={() => {
+    const user = JSON.parse(
+      localStorage.getItem("user") || "null"
+    );
 
-    Riwayat Pesan
+    if (!user) {
+      window.location.href = "/login";
+      return;
+    }
 
-    {notifPesan > 0 && (
-      <span className="absolute -top-2 -right-2 bg-yellow-400 text-black text-xs w-5 h-5 rounded-full flex items-center justify-center">
-        {notifPesan}
-      </span>
-    )}
+    window.location.href = "/beranda";
+  }}
+  className="px-5 py-2 rounded-full bg-blue-900 text-white hover:bg-yellow-600 transition"
+>
+  Beranda
+</button>
+  <button
+  onClick={() => {
+    const user = JSON.parse(
+      localStorage.getItem("user") || "null"
+    );
 
-    </button>
-  </Link>
+    if (!user) {
+      window.location.href = "/login";
+      return;
+    }
+
+    window.location.href = "/riwayatpesan";
+  }}
+  className="relative px-5 py-2 rounded-full bg-red-800 text-white hover:bg-red-600 transition"
+>
+  Riwayat Pesan
+
+  {notifPesan > 0 && (
+    <span className="absolute -top-2 -right-2 bg-yellow-400 text-black text-xs w-5 h-5 rounded-full flex items-center justify-center">
+      {notifPesan}
+    </span>
+  )}
+</button>
 </div>
       <div className={styles.homebody}>
       <div className={` text-center ${styles.container}`}>

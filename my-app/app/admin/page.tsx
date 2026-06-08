@@ -17,11 +17,11 @@ import Footadmin from "./component/footadmin";
 import NavAdmin from "./component/navadmin";
 import {useRouter} from "next/navigation";
 
-type Pesan = {
+type Chat = {
   id: number;
-  nama: string;
   nik: string;
-  isi: string;
+  nama: string;
+  username: string;
   createdAt: string;
 };
 
@@ -29,16 +29,17 @@ export default function AdminPage() {
   const [menu, setMenu] = useState("pesan");
   const [open, setOpen] = useState(false);
   const router = useRouter();
-  const [pesan, setPesan] = useState<Pesan[]>([]);
+
+  const [chats, setChats] = useState<Chat[]>([]);
 
   useEffect(() => {
     const loadData = async () => {
       try {
-        const res = await fetch("/api/pesan");
+        const res = await fetch("/api/chat");
 
         const data = await res.json();
 
-        setPesan(data);
+        setChats(data);
 
       } catch (error) {
         console.error(error);
@@ -104,7 +105,7 @@ export default function AdminPage() {
                   <span>Pesan</span>
                 </div>
 
-                {pesan.length > 0 && (
+                {chats.length > 0 && (
                   <span
                     className="
                       bg-red-500
@@ -113,7 +114,7 @@ export default function AdminPage() {
                       rounded-full
                     "
                   >
-                    {pesan.length}
+                    {chats.length}
                   </span>
                 )}
               </button>
@@ -210,7 +211,7 @@ export default function AdminPage() {
 
               <div className="space-y-5">
 
-                {pesan.length === 0 ? (
+                {chats.length === 0 ? (
                   <div
                     className="
                       bg-white dark:bg-[#1e293b]
@@ -224,67 +225,57 @@ export default function AdminPage() {
                     Belum ada pesan masuk
                   </div>
                 ) : (
-                  pesan.map((item) => (
-                    <div
-                      key={item.id}
-                      className="
-                        bg-white dark:bg-[#1e293b]
-                        rounded-3xl
-                        shadow-lg
-                        p-6
-                      "
-                    >
+                  chats.map((item) => (
+                   <div
+  key={item.id}
+  className="
+    bg-white dark:bg-[#1e293b]
+    rounded-3xl
+    shadow-lg
+    p-6
+  "
+>
+  <div className="flex justify-between items-center">
 
-                      <div className="flex justify-between mb-4">
+    <div>
+      <h2 className="font-bold text-xl dark:text-white">
+        {item.nama}
+      </h2>
 
-                        <div>
-                          <h2 className="font-bold text-xl dark:text-white">
-                            {item.nama}
-                          </h2>
+      <p className="text-gray-500 text-sm">
+        NIK: {item.nik}
+      </p>
+    </div>
 
-                          <p className="text-gray-500 text-sm">
-                            NIK: {item.nik}
-                          </p>
-                        </div>
+    <span className="text-sm text-gray-400">
+      {new Date(item.createdAt).toLocaleDateString("id-ID")}
+    </span>
 
-                        <span className="text-sm text-gray-400">
-                          {new Date(item.createdAt).toLocaleDateString("id-ID")}
-                        </span>
+  </div>
 
-                      </div>
+  <p className="mt-4 text-gray-500 dark:text-gray-300">
+    Klik tombol di bawah untuk membuka percakapan.
+  </p>
 
-                      <p className="text-gray-700 dark:text-gray-200 leading-7">
-                        {item.isi}
-                      </p>
+  <div className="mt-5">
 
-                      <div className="mt-5 flex gap-3">
+    <button
+      onClick={() =>
+        router.push(`/admin/chat/${item.id}`)
+      }
+      className="
+        px-5 py-2
+        rounded-xl
+        bg-[#004467]
+        text-white
+        hover:opacity-90
+      "
+    >
+      Buka Chat
+    </button>
 
-                        <button
-                          className="
-                            px-5 py-2
-                            rounded-xl
-                            bg-[#004467]
-                            text-white
-                            hover:opacity-90
-                          "
-                        >
-                          Balas
-                        </button>
-
-                        <button
-                          className="
-                            px-5 py-2
-                            rounded-xl
-                            bg-red-500
-                            text-white
-                            hover:opacity-90
-                          "
-                        >
-                          Hapus
-                        </button>
-
-                      </div>
-                    </div>
+  </div>
+</div>
                   ))
                 )}
 

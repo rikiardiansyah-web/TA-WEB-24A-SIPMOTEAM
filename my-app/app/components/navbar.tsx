@@ -17,10 +17,6 @@ export default function NavAdmin() {
   const pathname = usePathname();
 
   const [darkMode, setDarkMode] = useState(false);
-  useEffect(() => {
-    const theme = localStorage.getItem("theme") === "dark";
-    setDarkMode(theme);
-  }, []);
   const [menuOpen, setMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -32,10 +28,14 @@ export default function NavAdmin() {
     : null;
   
   useEffect(() => {
-  setTimeout(() => {
-    setMounted(true);
-  }, 0);
-}, []);
+    setTimeout(() => {
+      if (typeof window !== "undefined") {
+        const theme = localStorage.getItem("theme") === "dark";
+        setDarkMode(theme);
+      }
+      setMounted(true);
+    }, 0);
+  }, []);
 
   const linkClass = (path: string) =>
     `relative px-3 py-2 transition-all duration-300

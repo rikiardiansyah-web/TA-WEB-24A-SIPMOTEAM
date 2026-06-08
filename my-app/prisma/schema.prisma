@@ -33,11 +33,23 @@ model warga {
   fotoProfil String?
 }
 
-model Pesan {
+model Chat {
   id        Int      @id @default(autoincrement())
   nik       String
   username  String
   nama      String
-  isi       String
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  messages  Message[]
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  chatId    Int
+  chat     Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  pengirim   String
+  isi       String
+  dibaca    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
