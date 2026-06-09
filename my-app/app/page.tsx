@@ -22,39 +22,58 @@ export default function Home() {
   const [notifPesan, setNotifPesan] = useState(0);
   const [berita, setBerita] = useState<Berita[]>([]);
 
-  const kirimPesan = async () => {
-    const user = JSON.parse(localStorage.getItem("user") || "null");
+const kirimPesan = async () => {
+  const user = JSON.parse(
+    localStorage.getItem("user") || "null"
+  );
 
-    if (!user) {
-      alert("Silahkan login terlebih dahulu");
-      window.location.href = "/login";
-      return;
-    }
+  if (!user) {
+    alert("Silahkan login terlebih dahulu");
+    window.location.href = "/login";
+    return;
+  }
 
-    if (!pesan) {
-      alert("Pesan tidak boleh kosong");
-      return;
-    }
+  if (!pesan.trim()) {
+    alert("Pesan tidak boleh kosong");
+    return;
+  }
 
   try {
     setLoading(true);
 
-    const res = await fetch("/api/chat", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        nik: user.nik,
-        isi: pesan,
-      }),
-    });
+    // buat / ambil chat
+    const chatRes = await fetch(
+      "/api/chat",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nik: user.nik,
+        }),
+      }
+    );
 
-    const result = await res.json();
+    const chat = await chatRes.json();
 
-    if (!res.ok) {
-      alert(result.error);
-      return;
+    const messageRes = await fetch(
+      "/api/chat/message",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          chatId: chat.id,
+          pengirim: "user",
+          isi: pesan,
+        }),
+      }
+    );
+
+    if (!messageRes.ok) {
+      throw new Error("Gagal mengirim pesan");
     }
 
     alert("Pesan berhasil dikirim");

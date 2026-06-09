@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Navbar from "../components/navbar";
-import Footer from "../components/footer";
 
 type Message = {
   id: number;
@@ -118,11 +117,12 @@ const kirimPesan = async () => {
   }
 };
 
+
 return (
   <>
     <Navbar />
 
-    <div className="min-h-screen pt-28 px-5 bg-slate-50 dark:bg-slate-900">
+    <div className="min-h-screen pt-28 px-5 bg-slate-100 dark:bg-slate-900">
 
       <div className="max-w-4xl mx-auto">
 
@@ -140,21 +140,14 @@ return (
 
           <>
             <div
-              className="
-                bg-slate-100
-                dark:bg-slate-800
-                p-5
-                rounded-3xl
-                h-[70vh]
-                overflow-y-auto
-              "
+              className="p-5 rounded-3xl h-[70vh] overflow-y-auto bg-slate-200 dark:bg-slate-800 shadow-lg"
             >
 
               <div className="space-y-4">
 
                 {messages.length === 0 ? (
 
-                  <div className="text-center text-gray-500">
+                  <div className="text-center text-gray-500 dark:text-gray-400">
                     Belum ada pesan
                   </div>
 
@@ -185,7 +178,19 @@ return (
                           }
                         `}
                       >
-                        {msg.isi}
+                        <div>{msg.isi}</div>
+                        {msg.createdAt && (
+                          <div
+                            className="text-xs text-gray-300 mt-1 text-right"
+                          >
+                            {new Date(msg.createdAt).toLocaleString()}
+                          </div>
+                        )}
+                        {msg.pengirim === "user" && (
+                          <div className="text-xs text-gray-300 mt-1 text-right">
+                            {msg.dibaca ? "✓✓ Dibaca" : "✓ Terkirim"}
+                          </div>
+                        )}
                       </div>
 
                     </div>

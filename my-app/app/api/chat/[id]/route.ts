@@ -20,6 +20,16 @@ export async function GET(
         },
       },
     });
+await prisma.message.updateMany({
+  where: {
+    chatId: Number(id),
+    pengirim: "user",
+    dibaca: false,
+  },
+  data: {
+    dibaca: true,
+  },
+});
 
     return Response.json(chat);
 
