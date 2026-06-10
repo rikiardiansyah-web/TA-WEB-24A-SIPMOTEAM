@@ -252,7 +252,32 @@ useEffect(() => {
             className="w-full h-auto rounded-lg shadow-md"
             />
         </div>
+        
+        
       </div>
+
+<div className="flex flex-col md:flex-row items-center justify-center gap-1 mt-8">
+  <div className={`w-full md:w-1/2 ${styles.leftbody}`}>
+          <img
+            src="/images/gambat1.jpg"
+            alt="Desa Sungai Nibung"
+            className="w-full h-auto rounded-lg shadow-md"
+            />
+        </div>
+        <div className={`w-full md:w-1/2 ${styles.rightbody}`}>
+        <p>Desa Sungai Nibung</p>
+          Desa Sungai Nibung merupakan salah satu desa yang terletak 
+          di Kecamatan Dente Teladas, Kabupaten Tulang Bawang, Provinsi Lampung.
+          Desa ini berada di wilayah pesisir yang memiliki potensi sumber daya alam yang cukup besar,
+          khususnya di sektor perikanan dan ekosistem mangrove. Desa Sungai Nibung merupakan salah satu dari 
+          sekitar 12 desa yang ada di Kecamatan Dente Teladas dan memiliki karakter wilayah pesisir yang strategis.
+        </div>
+        
+        
+
+        
+      </div>
+
       </div>
 
       <div className="px-5 py-10">
