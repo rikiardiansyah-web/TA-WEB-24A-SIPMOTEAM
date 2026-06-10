@@ -377,17 +377,239 @@ const selesai =
             </div>
           )}
           {menu === "pengajuan" && (
-            <div
-              className="
-                bg-white dark:bg-[#1e293b]
-                rounded-3xl
-                p-10
-                shadow-lg
-              "
-            >
-              <h1 className="text-3xl font-bold dark:text-white">
+            <div>
+
+              <h1 className="text-3xl font-bold dark:text-white mb-6">
                 Pengajuan Warga
               </h1>
+
+              <div className="grid lg:grid-cols-3 gap-5">
+
+                {/* DIAJUKAN */}
+                <div className="bg-yellow-100 rounded-3xl p-5">
+
+                  <h2 className="font-bold text-xl mb-4">
+                    Diajukan ({diajukan.length})
+                  </h2>
+
+                  <div className="space-y-3">
+
+                    {diajukan.map((item) => (
+
+                      <div
+                        key={item.id}
+                        className="
+                          bg-white
+                          rounded-2xl
+                          p-4
+                          shadow
+                        "
+                      >
+
+                        <h3
+                          className={`${
+                            !item.dibacaAdmin
+                              ? "font-bold"
+                              : "font-normal"
+                          }`}
+                        >
+                          {item.nama}
+                        </h3>
+
+                        <p className="text-sm text-gray-500">
+                          {item.judul}
+                        </p>
+
+                        <p className="text-xs text-gray-400 mt-2">
+                          {new Date(
+                            item.createdAt
+                          ).toLocaleDateString("id-ID")}
+                        </p>
+
+                        {item.fileUrl && (
+                          <a
+                            href={item.fileUrl}
+                            target="_blank"
+                            className="
+                              block
+                              text-blue-600
+                              underline
+                              mt-2
+                            "
+                          >
+                            Lihat File
+                          </a>
+                        )}
+
+                        <div className="flex gap-2 mt-3">
+
+                          <button
+                            onClick={() =>
+                              updateStatus(
+                                item.id,
+                                "diproses"
+                              )
+                            }
+                            className="
+                              px-3 py-1
+                              bg-blue-600
+                              text-white
+                              rounded-lg
+                            "
+                          >
+                            Proses
+                          </button>
+
+                        </div>
+
+                      </div>
+
+                    ))}
+
+                  </div>
+
+                </div>
+
+                {/* DIPROSES */}
+                <div className="bg-blue-100 rounded-3xl p-5">
+
+                  <h2 className="font-bold text-xl mb-4">
+                    Diproses ({diproses.length})
+                  </h2>
+
+                  <div className="space-y-3">
+
+                    {diproses.map((item) => (
+
+                      <div
+                        key={item.id}
+                        className="
+                          bg-white
+                          rounded-2xl
+                          p-4
+                          shadow
+                        "
+                      >
+
+                        <h3 className="font-bold">
+                          {item.nama}
+                        </h3>
+
+                        <p className="text-sm text-gray-500">
+                          {item.judul}
+                        </p>
+
+                        {item.fileUrl && (
+                          <a
+                            href={item.fileUrl}
+                            target="_blank"
+                            className="
+                              block
+                              text-blue-600
+                              underline
+                              mt-2
+                            "
+                          >
+                            Lihat File
+                          </a>
+                        )}
+
+                        <div className="flex gap-2 mt-3">
+
+                          <button
+                            onClick={() =>
+                              updateStatus(
+                                item.id,
+                                "diacc"
+                              )
+                            }
+                            className="
+                              px-3 py-1
+                              bg-green-600
+                              text-white
+                              rounded-lg
+                            "
+                          >
+                            ACC
+                          </button>
+
+                          <button
+                            onClick={() =>
+                              updateStatus(
+                                item.id,
+                                "ditolak"
+                              )
+                            }
+                            className="
+                              px-3 py-1
+                              bg-red-600
+                              text-white
+                              rounded-lg
+                            "
+                          >
+                            Tolak
+                          </button>
+
+                        </div>
+
+                      </div>
+
+                    ))}
+
+                  </div>
+
+                </div>
+
+                {/* SELESAI */}
+                <div className="bg-green-100 rounded-3xl p-5">
+
+                  <h2 className="font-bold text-xl mb-4">
+                    Selesai ({selesai.length})
+                  </h2>
+
+                  <div className="space-y-3">
+
+                    {selesai.map((item) => (
+
+                      <div
+                        key={item.id}
+                        className="
+                          bg-white
+                          rounded-2xl
+                          p-4
+                          shadow
+                        "
+                      >
+
+                        <h3 className="font-bold">
+                          {item.nama}
+                        </h3>
+
+                        <p>{item.judul}</p>
+
+                        <span
+                          className={`
+                            text-sm
+                            ${
+                              item.status === "diacc"
+                                ? "text-green-600"
+                                : "text-red-600"
+                            }
+                          `}
+                        >
+                          {item.status}
+                        </span>
+
+                      </div>
+
+                    ))}
+
+                  </div>
+
+                </div>
+
+              </div>
+
             </div>
           )}
           {menu === "warga" && (
