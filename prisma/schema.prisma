@@ -53,3 +53,22 @@ model Message {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model Pengajuan {
+  id          Int      @id @default(autoincrement())
+
+  nik         String
+  nama        String
+
+  judul       String
+  deskripsi   String
+
+  status      String   @default("diajukan")
+
+  pdfUrl      String?
+
+  dibacaAdmin Boolean  @default(false)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
