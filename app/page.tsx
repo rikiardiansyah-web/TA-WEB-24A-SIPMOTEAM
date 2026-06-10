@@ -142,7 +142,7 @@ useEffect(() => {
       }
       setOpen(true);
     }}
-    className="px-50 py-3 rounded-full bg-blue-900 text-white hover:bg-blue-300 transition">
+    className="px-50 py-3 rounded-full bg-blue-900 text-white hover:bg-yellow-400 transition">
       Berikan Saranmu
     </button>
       </div>
