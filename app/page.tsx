@@ -180,7 +180,7 @@ useEffect(() => {
 
 <div className="flex justify-center gap-10 mt-4">
   <Link href="/">
-    <button className=" px-5 py-2 rounded-full bg-blue-900 text-white hover:bg-yellow-600 transition">
+    <button className=" px-8 py-3 rounded-full bg-blue-900 text-white hover:bg-yellow-600 transition">
      Home
   </button>
   </Link>
