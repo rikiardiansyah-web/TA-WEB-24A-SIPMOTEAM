@@ -87,21 +87,50 @@ export default function PengajuanPage() {
 
         setLoading(true);
 
+        let fileUrl = null;
+
+        if (file) {
+
+        const formData =
+            new FormData();
+
+        formData.append(
+            "file",
+            file
+        );
+
+        const uploadRes =
+            await fetch(
+            "/api/upload-pengajuan",
+            {
+                method: "POST",
+                body: formData,
+            }
+            );
+
+        const uploadResult =
+            await uploadRes.json();
+
+        fileUrl =
+            uploadResult.url;
+        }
+
         const res = await fetch(
-          "/api/pengajuan",
-          {
+        "/api/pengajuan",
+        {
             method: "POST",
             headers: {
-              "Content-Type":
+            "Content-Type":
                 "application/json",
             },
             body: JSON.stringify({
-              nik: user.nik,
-              nama: user.nama,
-              judul,
-              deskripsi,
+            nik: user.nik,
+            nama: user.nama,
+            judul,
+            deskripsi,
+            fileUrl,
             }),
-          }
+        }
         );
 
         const result =
@@ -118,6 +147,7 @@ export default function PengajuanPage() {
 
         setJudul("");
         setDeskripsi("");
+        setFile(null);
 
         loadPengajuan();
 
