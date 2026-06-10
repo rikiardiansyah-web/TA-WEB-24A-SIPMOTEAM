@@ -35,6 +35,7 @@ type Pengajuan = {
   pdfUrl?: string;
   dibacaAdmin: boolean;
   createdAt: string;
+  fileUrl?: string;
 };
 
 export default function AdminPage() {

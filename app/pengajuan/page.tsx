@@ -17,6 +17,8 @@ export default function PengajuanPage() {
   const [judul, setJudul] = useState("");
   const [deskripsi, setDeskripsi] = useState("");
 
+  const [file, setFile] = useState<File | null>(null);
+
   const [data, setData] =
     useState<Pengajuan[]>([]);
 
@@ -195,6 +197,22 @@ export default function PengajuanPage() {
                 rounded-xl
                 p-3
               "
+            />
+
+            <input
+            type="file"
+            onChange={(e) =>
+                setFile(
+                e.target.files?.[0] || null
+                )
+            }
+            className="
+                w-full
+                border
+                rounded-xl
+                p-3
+                mt-4
+            "
             />
 
             <button
