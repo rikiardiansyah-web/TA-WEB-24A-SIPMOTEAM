@@ -122,7 +122,7 @@ useEffect(() => {
           di Kecamatan Dente Teladas, Kabupaten Tulang Bawang, Provinsi Lampung.
           Desa ini berada di wilayah pesisir yang memiliki potensi sumber daya alam yang cukup besar,
           khususnya di sektor perikanan dan ekosistem mangrove. Desa Sungai Nibung merupakan salah satu dari 
-          sekitar 12 desa yang ada di Kecamatan Dente Teladas dan memiliki karakter wilayah pesisir yang strategis.
+          sekitar 12 desa yang ada di Kecamatan Dente Teladas dan memiliki karakter wilayah pesisir yang strategis dan mudah.
         </div>
   
       </div>
