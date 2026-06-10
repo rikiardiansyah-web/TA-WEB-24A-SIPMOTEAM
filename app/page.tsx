@@ -220,12 +220,12 @@ useEffect(() => {
 
     window.location.href = "/riwayatpesan";
   }}
-  className="relative px-5 py-2 rounded-full bg-blue-900 text-white hover:bg-red-600 transition"
+  className="relative px-3 py-3 rounded-full bg-blue-900 text-white hover:bg-yellow-400 transition"
 >
   Riwayat Pesan
 
   {notifPesan > 0 && (
-    <span className="absolute -top-2 -right-2 bg-yellow-400 text-black text-xs w-5 h-5 rounded-full flex items-center justify-center">
+    <span className="absolute -top-8 -right-2 bg-yellow-400 text-black text-xs w-5 h-5 rounded-full flex items-center justify-center">
       {notifPesan}
     </span>
   )}
