@@ -182,7 +182,7 @@ useEffect(() => {
   <Link href="/">
     <button className="w-full px-5 py-2 rounded-full bg-blue-900 text-white hover:bg-yellow-400 transition">
      Home
-    </button>
+  </button>
   </Link>
 
   <Link href="/berita">
@@ -220,7 +220,7 @@ useEffect(() => {
 
     window.location.href = "/riwayatpesan";
   }}
-  className="relative px-5 py-2 rounded-full bg-red-800 text-white hover:bg-red-600 transition"
+  className="relative px-5 py-2 rounded-full bg-blue-900 text-white hover:bg-red-600 transition"
 >
   Riwayat Pesan
 
