@@ -62,6 +62,7 @@ model Pengajuan {
 
   judul       String
   deskripsi   String
+  fileUrl    String?
 
   status      String   @default("diajukan")
 

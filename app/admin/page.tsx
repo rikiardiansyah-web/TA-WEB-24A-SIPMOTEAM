@@ -25,11 +25,24 @@ type Chat = {
   createdAt: string;
 };
 
+type Pengajuan = {
+  id: number;
+  nik: string;
+  nama: string;
+  judul: string;
+  deskripsi: string;
+  status: string;
+  pdfUrl?: string;
+  dibacaAdmin: boolean;
+  createdAt: string;
+};
+
 export default function AdminPage() {
   const [menu, setMenu] = useState("pesan");
   const [open, setOpen] = useState(false);
   const router = useRouter();
-
+  const [pengajuan, setPengajuan] =
+    useState<Pengajuan[]>([]);
   const [chats, setChats] = useState<Chat[]>([]);
 
   useEffect(() => {
@@ -40,6 +53,13 @@ export default function AdminPage() {
         const data = await res.json();
 
         setChats(data);
+        const resPengajuan =
+          await fetch("/api/pengajuan");
+
+        const dataPengajuan =
+          await resPengajuan.json();
+
+        setPengajuan(dataPengajuan);
 
       } catch (error) {
         console.error(error);
@@ -48,6 +68,47 @@ export default function AdminPage() {
 
     loadData();
   }, []);
+  const diajukan =
+  pengajuan.filter(
+    (item) =>
+      item.status === "diajukan"
+  );
+
+const diproses =
+  pengajuan.filter(
+    (item) =>
+      item.status === "diproses"
+  );
+
+const selesai =
+  pengajuan.filter(
+    (item) =>
+      item.status === "diacc" ||
+      item.status === "ditolak"
+  );
+  const updateStatus =
+  async (
+    id: number,
+    status: string
+  ) => {
+
+    await fetch(
+      "/api/pengajuan/status",
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type":
+            "application/json",
+        },
+        body: JSON.stringify({
+          id,
+          status,
+        }),
+      }
+    );
+
+    location.reload();
+  };
 
   return (
     <>

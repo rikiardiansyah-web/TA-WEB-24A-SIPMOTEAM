@@ -10,6 +10,7 @@ type Pengajuan = {
   status: string;
   pdfUrl?: string;
   createdAt: string;
+  fileUrl?: string;
 };
 
 export default function PengajuanPage() {
