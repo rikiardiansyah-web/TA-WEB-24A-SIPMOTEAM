@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
+import NavAdmin from "../../component/navadmin";
 
 type Message = {
   id: number;
@@ -79,7 +80,9 @@ export default function ChatAdminPage() {
   };
 
   return (
-    <div className="min-h-screen p-10 bg-slate-100">
+    <>
+      <NavAdmin />
+      <div className="min-h-screen p-10 bg-slate-100">
 
       <h1 className="text-3xl font-bold mb-6">
         Chat Warga
@@ -142,5 +145,6 @@ export default function ChatAdminPage() {
       </div>
 
     </div>
+  </>
   );
 }
