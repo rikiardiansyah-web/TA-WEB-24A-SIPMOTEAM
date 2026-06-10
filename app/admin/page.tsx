@@ -64,21 +64,39 @@ export default function AdminPage() {
         >
           {open ? <FaTimes /> : <FaBars />}
         </button>
-        <aside
-          className={`
-            sticky
-            min-h-screen w-72
-            bg-gradient-to-b
-            from-[#00334d]
-            via-[#004467]
-            to-[#005b87]
-            border-r border-white/20
-            text-white
-            shadow-2xl
-            hidden md:block
-            transform transition-transform duration-300
-          `}
-        >
+          <aside
+            className={`
+              fixed md:relative
+              top-[70px] md:top-0
+              left-0
+              z-40
+
+              w-72
+              overflow-y-auto
+              h-[calc(100vh-70px)]
+
+              md:h-auto
+
+              bg-gradient-to-b
+              from-[#00334d]
+              via-[#004467]
+              to-[#005b87]
+
+              border-r border-white/20
+              text-white
+              shadow-2xl
+
+              transition-transform duration-300
+
+              ${
+                open
+                  ? "translate-x-0"
+                  : "-translate-x-full"
+              }
+
+              md:translate-x-0
+            `}
+          >
 
           <div className="p-6 mt-4">
 
@@ -227,55 +245,55 @@ export default function AdminPage() {
                 ) : (
                   chats.map((item) => (
                    <div
-  key={item.id}
-  className="
-    bg-white dark:bg-[#1e293b]
-    rounded-3xl
-    shadow-lg
-    p-6
-  "
->
-  <div className="flex justify-between items-center">
+                    key={item.id}
+                    className="
+                      bg-white dark:bg-[#1e293b]
+                      rounded-3xl
+                      shadow-lg
+                      p-6
+                    "
+                  >
+                    <div className="flex justify-between items-center">
 
-    <div>
-      <h2 className="font-bold text-xl dark:text-white">
-        {item.nama}
-      </h2>
+                      <div>
+                        <h2 className="font-bold text-xl dark:text-white">
+                          {item.nama}
+                        </h2>
 
-      <p className="text-gray-500 text-sm">
-        NIK: {item.nik}
-      </p>
-    </div>
+                        <p className="text-gray-500 text-sm">
+                          NIK: {item.nik}
+                        </p>
+                      </div>
 
-    <span className="text-sm text-gray-400">
-      {new Date(item.createdAt).toLocaleDateString("id-ID")}
-    </span>
+                      <span className="text-sm text-gray-400">
+                        {new Date(item.createdAt).toLocaleDateString("id-ID")}
+                      </span>
 
-  </div>
+                    </div>
 
-  <p className="mt-4 text-gray-500 dark:text-gray-300">
-    Klik tombol di bawah untuk membuka percakapan.
-  </p>
+                    <p className="mt-4 text-gray-500 dark:text-gray-300">
+                      Klik tombol di bawah untuk membuka percakapan.
+                    </p>
 
-  <div className="mt-5">
+                    <div className="mt-5">
 
-    <button
-      onClick={() =>
-        router.push(`/admin/chat/${item.id}`)
-      }
-      className="
-        px-5 py-2
-        rounded-xl
-        bg-[#004467]
-        text-white
-        hover:opacity-90
-      "
-    >
-      Buka Chat
-    </button>
+                      <button
+                        onClick={() =>
+                          router.push(`/admin/chat/${item.id}`)
+                        }
+                        className="
+                          px-5 py-2
+                          rounded-xl
+                          bg-[#004467]
+                          text-white
+                          hover:opacity-90
+                        "
+                      >
+                        Buka Chat
+                      </button>
 
-  </div>
-</div>
+                    </div>
+                  </div>
                   ))
                 )}
 
