@@ -3,7 +3,7 @@ import { prisma } from "@/src/lib/prisma";
 export async function GET() {
   try {
 
-    const pengajuan = await prisma.Pengajuan.findMany({
+    const pengajuan = await prisma.pengajuan.findMany({
       orderBy: {
         createdAt: "desc",
       },
@@ -28,7 +28,7 @@ export async function POST(req: Request) {
     const body = await req.json();
 
     const pengajuan =
-      await prisma.Pengajuan.create({
+      await prisma.pengajuan.create({
         data: {
           nik: body.nik,
           nama: body.nama,
