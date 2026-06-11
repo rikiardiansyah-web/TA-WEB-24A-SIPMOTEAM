@@ -32,6 +32,6 @@
     "typescript": "^5"
   },
   "prisma": {
-    "schema": "./prisma/prisma/schema.prisma"
+    "schema": "./prisma/schema.prisma"
   }
 }
