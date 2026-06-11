@@ -670,28 +670,7 @@ const handleGantiFoto = (
     shadow-lg
   "
 />
-<label
-  className="
-    mt-4
-    px-4
-    py-2
-    bg-cyan-600
-    hover:bg-cyan-700
-    text-white
-    rounded-xl
-    cursor-pointer
-    inline-block
-  "
->
-  Ganti Foto Profil
 
-  <input
-    type="file"
-    accept="image/*"
-    hidden
-    onChange={handleGantiFoto}
-  />
-</label>
     </div>
 
     {/* Informasi Admin */}
@@ -762,20 +741,31 @@ const handleGantiFoto = (
 
       </div>
 
-      <button
-        className="
-          mt-6
-          px-6
-          py-3
-          bg-cyan-600
-          hover:bg-cyan-700
-          text-white
-          rounded-xl
-          transition
-        "
-      >
-        Edit Profil
-      </button>
+      <div className="mt-6">
+  <label
+    className="
+      px-6
+      py-3
+      bg-cyan-600
+      hover:bg-cyan-700
+      text-white
+      rounded-xl
+      transition
+      cursor-pointer
+      inline-block
+    "
+  >
+    Edit Profil
+
+    <input
+      type="file"
+      accept="image/*"
+      hidden
+      onChange={handleGantiFoto}
+    />
+  </label>
+</div>
+       
 
       <div className="grid md:grid-cols-3 gap-4 mt-8">
 
