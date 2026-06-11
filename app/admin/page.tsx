@@ -9,7 +9,7 @@ import {
   FaEnvelope,
   FaBars,
   FaTimes,
-  FaBuilding,
+  FaUser,
   FaClipboardList,
 } from "react-icons/fa";
 
@@ -273,7 +273,7 @@ const handleGantiFoto = (
                   transition
                 "
               >
-                <FaBuilding />
+                <FaUser />
                 Profil Admin
               </button>
 

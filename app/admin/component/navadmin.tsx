@@ -13,6 +13,8 @@ export default function NavAdmin() {
     return localStorage.getItem("theme") === "dark";
   });
   const [menuOpen, setMenuOpen] = useState(false);
+  const [menu, setMenuState] = useState<string | null>(null);
+  const [open, setOpen] = useState(false);
 
   // sync theme global (PAKAI BODYY BIAR SAMA DENGAN USER)
   useEffect(() => {
@@ -34,6 +36,11 @@ export default function NavAdmin() {
          : "after:scale-x-0 hover:after:scale-x-100"
      }`;
 
+  function setMenu(name: string) {
+    // set currently selected submenu/menu name
+    setMenuState(name);
+  }
+
   return (
     <div className="navbar">
 
@@ -47,9 +54,21 @@ export default function NavAdmin() {
           Home
         </Link>
 
-        <Link href="/profile" className={linkClass("/profile")}>
-          Profile
-        </Link>
+              <button
+                onClick={() => {
+                  setMenu("pembangunan");
+                  setOpen(false);
+                }}
+                className="
+                  flex items-center gap-3
+                  w-full
+                  p-4 rounded-2xl
+                  hover:bg-[#03618f]
+                  transition
+                "
+              >
+                Profil
+              </button>
 
         <button
           onClick={() => setDarkMode(!darkMode)}
