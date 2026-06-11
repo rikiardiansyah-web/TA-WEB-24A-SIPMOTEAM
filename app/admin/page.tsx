@@ -125,6 +125,53 @@ const handleGantiFoto = (
     location.reload();
   };
 
+  const accPengajuan = async (
+    id: number
+  ) => {
+    if (!pdfFile) {
+      alert("Pilih PDF terlebih dahulu");
+      return;
+    }
+
+    const formData = new FormData();
+
+    formData.append(
+      "file",
+      pdfFile
+    );
+
+    const uploadRes =
+      await fetch(
+        "/api/upload-pdf",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+    const uploadResult =
+      await uploadRes.json();
+
+    await fetch(
+      "/api/pengajuan/status",
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type":
+            "application/json",
+        },
+        body: JSON.stringify({
+          id,
+          status: "diacc",
+          pdfUrl:
+            uploadResult.url,
+        }),
+      }
+    );
+
+    location.reload();
+  };
+
   return (
     <>
       <NavAdmin />
@@ -527,14 +574,29 @@ const handleGantiFoto = (
                             Lihat File
                           </a>
                         )}
+                        <input
+                          type="file"
+                          accept=".pdf"
+                          onChange={(e) =>
+                            setPdfFile(
+                              e.target.files?.[0] || null
+                            )
+                          }
+                          className="
+                            w-full
+                            border
+                            rounded-lg
+                            p-2
+                            mt-2
+                          "
+                        />
 
                         <div className="flex gap-2 mt-3">
 
                           <button
                             onClick={() =>
-                              updateStatus(
+                              accPengajuan(
                                 item.id,
-                                "diacc"
                               )
                             }
                             className="
