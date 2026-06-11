@@ -642,7 +642,19 @@ const selesai =
         font-bold
       "
     >
-      A
+      <img
+  src="/images/admin.jpg"
+  alt="Foto Admin"
+  className="
+    w-32
+    h-32
+    rounded-full
+    object-cover
+    border-4
+    border-cyan-500
+    shadow-lg
+  "
+/>
     </div>
 
     {/* Informasi Admin */}
