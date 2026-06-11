@@ -110,8 +110,10 @@ export default function Home() {
       <main className="flex-grow pt-24 pb-28 px-4 md:px-8 max-w-7xl mx-auto w-full flex flex-col gap-16">
         
         {/* HERO SECTION */}
-        <section className="relative rounded-3xl overflow-hidden shadow-2xl min-h-[480px] flex items-center justify-center text-white bg-cover bg-center" style={{ backgroundImage: "url('/images/gambar1.jpeg')" }}>
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px]"></div>
+        <section className="relative rounded-3xl overflow-hidden shadow-2xl min-h-[480px] flex items-center justify-center text-white bg-cover bg-center border border-white/10" style={{ backgroundImage: "url('/images/gambar1.jpeg')" }}>
+          {/* Cinematic gradient overlay & dynamic technical grid */}
+          <div className="absolute inset-0 bg-gradient-to-tr from-slate-950/95 via-slate-900/75 to-cyan-950/40 backdrop-blur-[1px]"></div>
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
           <div className="relative z-10 text-center px-6 py-12 max-w-3xl flex flex-col gap-6 items-center">
             <span className="bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider">
               Portal Resmi Desa

@@ -8,14 +8,14 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-plus-jakarta-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #020617;
+    --foreground: #f8fafc;
   }
 }
 
@@ -24,7 +24,7 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
 
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-plus-jakarta-sans), var(--font-geist-sans), Arial, Helvetica, sans-serif;
 
   transition:
     background 0.4s ease,
@@ -35,22 +35,24 @@ body.light {
   background:
     linear-gradient(
       135deg,
-      #ffffff 0%,
-      #f7fcfd 100%
+      #f0fdfa 0%,
+      #e0f2fe 50%,
+      #faf5ff 100%
     );
 
-  color: #111827;
+  color: #0f172a;
 }
 
 body.dark {
   background:
     linear-gradient(
       135deg,
-      #071018 0%,
-      #0d1620 100%
+      #020617 0%,
+      #0f172a 50%,
+      #0b0f19 100%
     );
 
-  color: white;
+  color: #f8fafc;
 }
 
 body::before {
@@ -61,14 +63,19 @@ body::before {
   z-index: -1;
   background:
     radial-gradient(
-      circle at top left,
-      rgba(0,255,255,0.25),
-      transparent 50%
+      circle at 15% 15%,
+      rgba(6, 182, 212, 0.15),
+      transparent 40%
     ),
     radial-gradient(
-      circle at bottom right,
-      rgba(0,255,255,0.25),
-      transparent 45%
+      circle at 85% 85%,
+      rgba(20, 184, 166, 0.15),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(99, 102, 241, 0.08),
+      transparent 50%
     );
 }
 
@@ -80,11 +87,11 @@ body::after {
   pointer-events: none;
   background:
     radial-gradient(
-      circle at center,
-      rgba(0,255,255,0.05),
-      transparent 70%
+      circle at 80% 20%,
+      rgba(236, 72, 153, 0.06),
+      transparent 40%
     );
-  filter: blur(120px);
+  filter: blur(100px);
 }
 
 .glass-card {
