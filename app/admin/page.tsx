@@ -739,6 +739,64 @@ const selesai =
       >
         Edit Profil
       </button>
+
+      <div className="grid md:grid-cols-3 gap-4 mt-8">
+
+  <div
+    className="
+      bg-cyan-100
+      dark:bg-cyan-900/30
+      rounded-2xl
+      p-5
+      text-center
+    "
+  >
+    <h3 className="text-gray-500 dark:text-gray-300">
+      Pesan Masuk
+    </h3>
+
+    <p className="text-3xl font-bold text-cyan-700 dark:text-cyan-400">
+      {chats.length}
+    </p>
+  </div>
+
+  <div
+    className="
+      bg-yellow-100
+      dark:bg-yellow-900/30
+      rounded-2xl
+      p-5
+      text-center
+    "
+  >
+    <h3 className="text-gray-500 dark:text-gray-300">
+      Pengajuan
+    </h3>
+
+    <p className="text-3xl font-bold text-yellow-700 dark:text-yellow-400">
+      {pengajuan.length}
+    </p>
+  </div>
+
+  <div
+    className="
+      bg-green-100
+      dark:bg-green-900/30
+      rounded-2xl
+      p-5
+      text-center
+    "
+  >
+    <h3 className="text-gray-500 dark:text-gray-300">
+      Status
+    </h3>
+
+    <p className="text-3xl font-bold text-green-700 dark:text-green-400">
+      Aktif
+    </p>
+  </div>
+
+</div>
     </div>
 
   </div>
