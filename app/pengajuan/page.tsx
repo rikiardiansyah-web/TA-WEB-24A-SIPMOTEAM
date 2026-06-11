@@ -202,7 +202,7 @@ export default function PengajuanPage() {
                   e.target.value
                 )
               }
-              placeholder="Judul Pengajuan"
+              placeholder="Jenis Pengajuan"
               className="
                 w-full
                 border
@@ -219,7 +219,7 @@ export default function PengajuanPage() {
                   e.target.value
                 )
               }
-              placeholder="Deskripsi Pengajuan"
+              placeholder="Silahkan berikan bagian data yang ingin diubah dan Jelaskan mengapa mengajukan Perubahan Data Diri, dan data apa saja yang ingin diubah. Contoh: 'Nik diKK anak saya salah, mohon diubah menjadi    1234567890123456'"
               rows={5}
               className="
                 w-full
@@ -277,7 +277,7 @@ export default function PengajuanPage() {
 
             {/* DIAJUKAN */}
 
-            <div className="min-w-[300px] bg-yellow-100 p-5 rounded-3xl">
+            <div className="min-w-[300px] bg-yellow-200 p-5 rounded-3xl">
 
               <h2 className="font-bold text-xl mb-4">
                 Diajukan
@@ -310,7 +310,7 @@ export default function PengajuanPage() {
 
             {/* DIPROSES */}
 
-            <div className="min-w-[300px] bg-blue-100 p-5 rounded-3xl">
+            <div className="min-w-[300px] bg-blue-200 p-5 rounded-3xl">
 
               <h2 className="font-bold text-xl mb-4">
                 Diproses
@@ -343,7 +343,7 @@ export default function PengajuanPage() {
 
             {/* SELESAI */}
 
-            <div className="min-w-[300px] bg-green-100 p-5 rounded-3xl">
+            <div className="min-w-[300px] bg-green-200 p-5 rounded-3xl">
 
               <h2 className="font-bold text-xl mb-4">
                 Selesai

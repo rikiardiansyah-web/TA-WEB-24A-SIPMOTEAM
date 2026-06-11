@@ -159,16 +159,31 @@ export default function Home() {
             <div className="w-12 h-12 rounded-2xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center text-2xl">
               ✍️
             </div>
-            <h3 className="text-xl font-bold text-gray-800 dark:text-white">Pengaduan Online</h3>
+            <h3 className="text-xl font-bold text-gray-800 dark:text-white">Pengajuan Online</h3>
             <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
-              Sampaikan pengaduan, kritik, atau saran perbaikan infrastruktur secara praktis melalui formulir online kami.
+              Sampaikan pengajuan perubahan data diri secara praktis melalui formulir online kami dan lihat riwayat pengajuannya.
             </p>
+                        <button
+              onClick={() => {
+                const user = JSON.parse(
+                  localStorage.getItem("user") || "null"
+                );
+                if (!user) {
+                  window.location.href = "/login";
+                  return;
+                }
+                window.location.href = "/pengajuan";
+              }}
+              className="mt-auto text-xs font-semibold text-cyan-600 dark:text-cyan-400 hover:underline text-left cursor-pointer flex items-center gap-1"
+            >
+              Ajukan Perubahan Data &rarr;
+            </button>
           </div>
           <div className="glass-card p-6 flex flex-col gap-4 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
             <div className="w-12 h-12 rounded-2xl bg-teal-500/10 text-teal-600 dark:text-teal-400 flex items-center justify-center text-2xl">
               🕒
             </div>
-            <h3 className="text-xl font-bold text-gray-800 dark:text-white">Pantau Riwayat</h3>
+            <h3 className="text-xl font-bold text-gray-800 dark:text-white">Response Obrolan</h3>
             <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
               Pantau respon dan tanggapan dari staf kelurahan/desa secara real-time atas laporan yang telah Anda sampaikan.
             </p>
@@ -185,7 +200,7 @@ export default function Home() {
               }}
               className="mt-auto text-xs font-semibold text-cyan-600 dark:text-cyan-400 hover:underline text-left cursor-pointer flex items-center gap-1"
             >
-              Lihat Riwayat Laporan &rarr;
+              Lihat Riwayat Pesan &rarr;
             </button>
           </div>
           <div className="glass-card p-6 flex flex-col gap-4 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
