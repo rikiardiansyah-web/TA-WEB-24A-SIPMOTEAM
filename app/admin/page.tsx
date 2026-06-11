@@ -42,6 +42,7 @@ export default function AdminPage() {
   const [menu, setMenu] = useState("pesan");
   const [open, setOpen] = useState(false);
   const router = useRouter();
+  const [foto, setFoto] = useState("/images/admin.jpg");
   const [pengajuan, setPengajuan] =
     useState<Pengajuan[]>([]);
   const [chats, setChats] = useState<Chat[]>([]);
@@ -87,6 +88,19 @@ const selesai =
       item.status === "diacc" ||
       item.status === "ditolak"
   );
+
+const handleGantiFoto = (
+  e: React.ChangeEvent<HTMLInputElement>
+) => {
+  const file = e.target.files?.[0];
+
+  if (!file) return;
+
+  const url = URL.createObjectURL(file);
+
+  setFoto(url);
+};
+
   const updateStatus =
   async (
     id: number,
@@ -643,7 +657,8 @@ const selesai =
       "
     >
       <img
-  src="/images/admin.jpg"
+  src={foto}
+  
   alt="Foto Admin"
   className="
     w-32
@@ -655,6 +670,28 @@ const selesai =
     shadow-lg
   "
 />
+<label
+  className="
+    mt-4
+    px-4
+    py-2
+    bg-cyan-600
+    hover:bg-cyan-700
+    text-white
+    rounded-xl
+    cursor-pointer
+    inline-block
+  "
+>
+  Ganti Foto Profil
+
+  <input
+    type="file"
+    accept="image/*"
+    hidden
+    onChange={handleGantiFoto}
+  />
+</label>
     </div>
 
     {/* Informasi Admin */}
