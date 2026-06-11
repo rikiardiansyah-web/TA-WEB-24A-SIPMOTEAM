@@ -617,17 +617,120 @@ const selesai =
           )}
           {menu === "pembangunan" && (
             <div
-              className="
-                bg-white dark:bg-[#1e293b]
-                rounded-3xl
-                p-10
-                shadow-lg
-              "
-            >
-              <h1 className="text-3xl font-bold dark:text-white">
-                Laporan Pembangunan Desa
-              </h1>
-            </div>
+  className="
+    bg-white dark:bg-[#1e293b]
+    rounded-3xl
+    p-10
+    shadow-lg
+  "
+>
+  <div className="flex flex-col md:flex-row items-center gap-8">
+    
+    {/* Foto Profil */}
+    <div
+      className="
+        w-32 h-32
+        rounded-full
+        bg-gradient-to-br
+        from-cyan-500
+        to-blue-700
+        flex
+        items-center
+        justify-center
+        text-white
+        text-5xl
+        font-bold
+      "
+    >
+      A
+    </div>
+
+    {/* Informasi Admin */}
+    <div className="flex-1">
+      <h1
+        className="
+          text-3xl
+          font-bold
+          text-slate-800
+          dark:text-white
+        "
+      >
+        Admin SIPMO
+      </h1>
+
+      <p className="text-gray-500 mt-1">
+        Administrator Sistem
+      </p>
+
+      <div className="grid md:grid-cols-2 gap-4 mt-6">
+        
+        <div>
+          <p className="text-gray-500 text-sm">
+            Username
+          </p>
+          <p className="font-semibold dark:text-white">
+            admin
+          </p>
+        </div>
+
+        <div>
+          <p className="text-gray-500 text-sm">
+            Email
+          </p>
+          <p className="font-semibold dark:text-white">
+            admin@sipmo.com
+          </p>
+        </div>
+
+        <div>
+          <p className="text-gray-500 text-sm">
+            Role
+          </p>
+          <p className="font-semibold dark:text-white">
+            Super Admin
+          </p>
+        </div>
+
+        <div>
+          <p className="text-gray-500 text-sm">
+            Status
+          </p>
+          <span
+            className="
+              inline-block
+              px-3
+              py-1
+              rounded-full
+              bg-green-100
+              text-green-700
+              text-sm
+              font-medium
+            "
+          >
+            Aktif
+          </span>
+        </div>
+
+      </div>
+
+      <button
+        className="
+          mt-6
+          px-6
+          py-3
+          bg-cyan-600
+          hover:bg-cyan-700
+          text-white
+          rounded-xl
+          transition
+        "
+      >
+        Edit Profil
+      </button>
+    </div>
+
+  </div>
+</div>
           )}
 
         </main>
