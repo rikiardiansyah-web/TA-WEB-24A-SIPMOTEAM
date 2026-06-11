@@ -46,6 +46,7 @@ export default function AdminPage() {
   const [pengajuan, setPengajuan] =
     useState<Pengajuan[]>([]);
   const [chats, setChats] = useState<Chat[]>([]);
+  const [pdfFile, setPdfFile] = useState<File | null>(null);
 
   useEffect(() => {
     const loadData = async () => {
@@ -125,52 +126,49 @@ const handleGantiFoto = (
     location.reload();
   };
 
-  const accPengajuan = async (
-    id: number
-  ) => {
-    if (!pdfFile) {
-      alert("Pilih PDF terlebih dahulu");
-      return;
+  const accPengajuan = async (id: number) => {
+  if (!pdfFile) {
+    alert("Pilih PDF terlebih dahulu");
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("file", pdfFile);
+
+  const uploadRes = await fetch(
+    "/api/pengajuan/upload-pdf",
+    {
+      method: "POST",
+      body: formData,
     }
+  );
 
-    const formData = new FormData();
+  const uploadResult =
+    await uploadRes.json();
 
-    formData.append(
-      "file",
-      pdfFile
-    );
+  console.log("HASIL UPLOAD:", uploadResult);
 
-    const uploadRes =
-      await fetch(
-        "/api/upload-pdf",
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
+  const statusRes = await fetch(
+    "/api/pengajuan/status",
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type":
+          "application/json",
+      },
+      body: JSON.stringify({
+        id,
+        status: "diacc",
+        pdfUrl: uploadResult.url,
+      }),
+    }
+  );
+  const result = await statusRes.json();
 
-    const uploadResult =
-      await uploadRes.json();
+  console.log("HASIL UPDATE:", result);
 
-    await fetch(
-      "/api/pengajuan/status",
-      {
-        method: "PATCH",
-        headers: {
-          "Content-Type":
-            "application/json",
-        },
-        body: JSON.stringify({
-          id,
-          status: "diacc",
-          pdfUrl:
-            uploadResult.url,
-        }),
-      }
-    );
-
-    location.reload();
-  };
+  location.reload();
+};
 
   return (
     <>
