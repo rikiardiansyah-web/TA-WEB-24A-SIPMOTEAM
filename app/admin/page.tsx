@@ -168,6 +168,7 @@ const handleGantiFoto = (
   console.log("HASIL UPDATE:", result);
 
   location.reload();
+
 };
 
   return (
@@ -321,6 +322,23 @@ const handleGantiFoto = (
                 <FaUser />
                 Profil Admin
               </button>
+
+              <button
+  onClick={() => {
+    setMenu("aktivitas");
+    setOpen(false);
+  }}
+  className="
+    flex items-center gap-3
+    w-full
+    p-4 rounded-2xl
+    hover:bg-[#03618f]
+    transition
+  "
+>
+  <FaClipboardList />
+  Riwayat Aktivitas
+</button>
 
             </div>
           </div>
@@ -889,6 +907,7 @@ const handleGantiFoto = (
   </div>
 </div>
           )}
+          
 
         </main>
       </div>
