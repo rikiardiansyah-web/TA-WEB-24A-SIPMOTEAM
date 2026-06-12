@@ -90,6 +90,18 @@ const selesai =
       item.status === "ditolak"
   );
 
+const diterima =
+  pengajuan.filter(
+    (item) =>
+      item.status === "diacc"
+  );
+
+const ditolak =
+  pengajuan.filter(
+    (item) =>
+      item.status === "ditolak"
+  );
+
 const handleGantiFoto = (
   e: React.ChangeEvent<HTMLInputElement>
 ) => {
@@ -902,6 +914,116 @@ const handleGantiFoto = (
   </div>
 
 </div>
+
+<div className="mt-10">
+  <h2
+    className="
+      text-2xl
+      font-bold
+      mb-5
+      dark:text-white
+    "
+  >
+    Statistik Pengajuan
+  </h2>
+
+  <div className="space-y-4">
+
+    {/* Diajukan */}
+    <div>
+      <div className="flex justify-between">
+        <span>Diajukan</span>
+        <span>{diajukan.length}</span>
+      </div>
+
+      <div className="w-full bg-gray-200 rounded-full h-4">
+        <div
+          className="bg-yellow-500 h-4 rounded-full"
+          style={{
+            width: `${
+              pengajuan.length === 0
+                ? 0
+                : (diajukan.length /
+                    pengajuan.length) *
+                  100
+            }%`,
+          }}
+        />
+      </div>
+    </div>
+
+    {/* Diproses */}
+    <div>
+      <div className="flex justify-between">
+        <span>Diproses</span>
+        <span>{diproses.length}</span>
+      </div>
+
+      <div className="w-full bg-gray-200 rounded-full h-4">
+        <div
+          className="bg-blue-500 h-4 rounded-full"
+          style={{
+            width: `${
+              pengajuan.length === 0
+                ? 0
+                : (diproses.length /
+                    pengajuan.length) *
+                  100
+            }%`,
+          }}
+        />
+      </div>
+    </div>
+
+    {/* Diterima */}
+    <div>
+      <div className="flex justify-between">
+        <span>Diterima</span>
+        <span>{diterima.length}</span>
+      </div>
+
+      <div className="w-full bg-gray-200 rounded-full h-4">
+        <div
+          className="bg-green-500 h-4 rounded-full"
+          style={{
+            width: `${
+              pengajuan.length === 0
+                ? 0
+                : (diterima.length /
+                    pengajuan.length) *
+                  100
+            }%`,
+          }}
+        />
+      </div>
+    </div>
+
+    {/* Ditolak */}
+    <div>
+      <div className="flex justify-between">
+        <span>Ditolak</span>
+        <span>{ditolak.length}</span>
+      </div>
+
+      <div className="w-full bg-gray-200 rounded-full h-4">
+        <div
+          className="bg-red-500 h-4 rounded-full"
+          style={{
+            width: `${
+              pengajuan.length === 0
+                ? 0
+                : (ditolak.length /
+                    pengajuan.length) *
+                  100
+            }%`,
+          }}
+        />
+      </div>
+    </div>
+
+  </div>
+</div>
+
     </div>
 
   </div>
