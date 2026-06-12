@@ -907,7 +907,66 @@ const handleGantiFoto = (
   </div>
 </div>
           )}
-          
+          {menu === "aktivitas" && (
+  <div
+    className="
+      bg-white
+      dark:bg-[#1e293b]
+      rounded-3xl
+      p-10
+      shadow-lg
+    "
+  >
+    <h1 className="text-3xl font-bold mb-6 dark:text-white">
+      Riwayat Aktivitas Admin
+    </h1>
+
+    <div className="space-y-4">
+      {pengajuan.map((item) => (
+        <div
+          key={item.id}
+          className="
+            border
+            rounded-xl
+            p-4
+            dark:border-slate-700
+          "
+        >
+          <h3 className="font-bold dark:text-white">
+            {item.nama}
+          </h3>
+
+          <p className="text-gray-500">
+            {item.judul}
+          </p>
+
+          <p
+            className={`
+              mt-2 font-semibold
+              ${
+                item.status === "diacc"
+                  ? "text-green-600"
+                  : item.status === "ditolak"
+                  ? "text-red-600"
+                  : item.status === "diproses"
+                  ? "text-blue-600"
+                  : "text-yellow-600"
+              }
+            `}
+          >
+            Status: {item.status}
+          </p>
+
+          <p className="text-sm text-gray-400 mt-1">
+            {new Date(
+              item.createdAt
+            ).toLocaleString("id-ID")}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+)}
 
         </main>
       </div>
