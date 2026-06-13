@@ -53,6 +53,7 @@ type Admin = {
   fotoProfil?: string;
   role: string;
   aktif: boolean;
+  password: string;
 };
 
 export default function AdminPage() {
@@ -67,6 +68,7 @@ const [editMode, setEditMode] = useState(false);
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [aktivitas, setAktivitas] =
     useState<Aktivitas[]>([]);
+  const [showPassword, setShowPassword] = useState(false);
 
 useEffect(() => {
   const loadProfile = async () => {
@@ -924,6 +926,32 @@ await fetch("/api/admin/profile/update", {
           className="sipmo-input mt-2 bg-gray-100"
         />
       </div>
+  <div>
+  <label className="font-semibold">Password</label>
+
+  <div className="relative mt-2">
+    <input
+      type={showPassword ? "text" : "password"}
+      value={adminProfile?.password || ""}
+      readOnly={!editMode}
+      onChange={(e) =>
+        setAdminProfile({
+          ...adminProfile!,
+          password: e.target.value,
+        })
+      }
+      className="sipmo-input w-full pr-10"
+    />
+
+    <button
+      type="button"
+      onClick={() => setShowPassword(!showPassword)}
+      className="absolute right-3 top-2.5 text-gray-500"
+    >
+      {showPassword ? "🙈" : "👁"}
+    </button>
+  </div>
+</div>
       <button
   onClick={() => setEditMode(!editMode)}
   className="mt-6 w-full bg-[#004467] text-white py-2 rounded-xl"
