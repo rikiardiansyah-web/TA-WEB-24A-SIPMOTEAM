@@ -1,25 +1,54 @@
-import { NextResponse } from "next/server";
+import { prisma } from "@/src/lib/prisma";
 
 export async function POST(req: Request) {
-  const { username, password } = await req.json();
+  try {
 
-  if (
-    username === "admin" &&
-    password === "admin123"
-  ) {
-    return NextResponse.json({
-      id: 1,
-      username: "admin",
-      role: "admin",
-    });
-  }
+    const {
+      username,
+      password,
+    } = await req.json();
 
-  return NextResponse.json(
-    {
-      error: "Username atau password salah",
-    },
-    {
-      status: 401,
+    const admin =
+      await prisma.admin.findUnique({
+        where: {
+          username,
+        },
+      });
+
+    if (!admin) {
+      return Response.json(
+        {
+          error: "Admin tidak ditemukan",
+        },
+        {
+          status: 404,
+        }
+      );
     }
-  );
+
+    if (admin.password !== password) {
+      return Response.json(
+        {
+          error: "Password salah",
+        },
+        {
+          status: 401,
+        }
+      );
+    }
+
+    return Response.json(admin);
+
+  } catch (error) {
+
+    return Response.json(
+      {
+        error: "Login gagal",
+      },
+      {
+        status: 500,
+      }
+    );
+
+  }
 }
