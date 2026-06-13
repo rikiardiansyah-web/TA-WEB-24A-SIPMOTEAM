@@ -59,7 +59,8 @@ export default function AdminPage() {
   const [menu, setMenu] = useState("pesan");
   const [open, setOpen] = useState(false);
   const router = useRouter();
-  const [foto, setFoto] = useState(" ");
+  const [adminProfile, setAdminProfile] = useState<Admin | null>(null);
+const [editMode, setEditMode] = useState(false);
   const [admin, setAdmin] =
     useState<Admin | null>(null);
   const [pengajuan, setPengajuan] =
@@ -68,19 +69,18 @@ export default function AdminPage() {
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [aktivitas, setAktivitas] =
     useState<Aktivitas[]>([]);
-const [adminLogin, setAdminLogin] = useState<Admin | null>(null);
 
 useEffect(() => {
-  const loadAdmin = () => {
-    const data = JSON.parse(
-      localStorage.getItem("admin") || "{}"
-    );
+  const loadProfile = async () => {
+    const admin = JSON.parse(localStorage.getItem("admin") || "{}");
 
-    console.log(data);
-    setAdminLogin(data);
+    const res = await fetch(`/api/admin/profile?id=${admin.id}`);
+    const data = await res.json();
+
+    setAdminProfile(data);
   };
 
-  loadAdmin();
+  loadProfile();
 }, []);
     useEffect(() => {
     const loadData = async () => {
@@ -177,21 +177,10 @@ const handleGantiFoto = async (
   const uploadData =
     await uploadRes.json();
 
-  setFoto(uploadData.url);
-  const adminBaru = {
-  ...adminLogin,
-  fotoProfil:
-    uploadData.url,
-};
-
-localStorage.setItem(
-  "admin",
-  JSON.stringify(adminBaru)
-);
-
-setAdminLogin(adminBaru);
-setFoto(uploadData.url);
-};
+setAdminProfile({
+  ...adminProfile!,
+  fotoProfil: uploadData.url,
+});
 
   const updateStatus =
   async (
@@ -842,8 +831,7 @@ setFoto(uploadData.url);
     >
 <img
   src={
-    foto ||
-    adminLogin?.fotoProfil ||
+    adminProfile?.fotoProfil ||
     "/images/admin.jpg"
   }
   
@@ -861,6 +849,15 @@ setFoto(uploadData.url);
 
     </div>
 
+<div>
+  <label>ID Admin</label>
+  <input
+    value={adminProfile?.id}
+    readOnly
+    className="sipmo-input mt-2"
+  />
+</div>
+
     {/* Informasi Admin */}
     <div className="flex-1">
       <h1
@@ -871,7 +868,7 @@ setFoto(uploadData.url);
           dark:text-white
         "
       >
-        {adminLogin?.nama}
+        {adminProfile?.nama}
       </h1>
 
       <p className="text-gray-500 mt-1">
@@ -885,7 +882,7 @@ setFoto(uploadData.url);
             Username
           </p>
           <p className="font-semibold dark:text-white">
-            {adminLogin?.username}
+            {adminProfile?.username}
           </p>
         </div>
 
@@ -894,7 +891,7 @@ setFoto(uploadData.url);
             Email
           </p>
           <p className="font-semibold dark:text-white">
-            {adminLogin?.email}
+            {adminProfile?.email}
           </p>
         </div>
 
@@ -903,7 +900,7 @@ setFoto(uploadData.url);
             Role
           </p>
           <p className="font-semibold dark:text-white">
-            {adminLogin?.role}
+            {adminProfile?.role}
           </p>
         </div>
 
