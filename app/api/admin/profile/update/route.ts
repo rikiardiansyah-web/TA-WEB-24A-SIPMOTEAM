@@ -1,14 +1,17 @@
 import { prisma } from "@/src/lib/prisma";
 
-export async function PATCH(
-  req: Request
-) {
+export async function PATCH(req: Request) {
+  try {
+    const body = await req.json();
 
-  const body =
-    await req.json();
+    if (!body.id) {
+      return Response.json(
+        { error: "ID wajib diisi" },
+        { status: 400 }
+      );
+    }
 
-  const admin =
-    await prisma.admin.update({
+    const admin = await prisma.admin.update({
       where: {
         id: body.id,
       },
@@ -21,5 +24,18 @@ export async function PATCH(
       },
     });
 
-  return Response.json(admin);
+    return Response.json({
+      success: true,
+      data: admin,
+    });
+
+  } catch (error) {
+    return Response.json(
+      {
+        success: false,
+        error: "Gagal update admin",
+      },
+      { status: 500 }
+    );
+  }
 }

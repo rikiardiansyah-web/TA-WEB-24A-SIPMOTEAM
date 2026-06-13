@@ -59,7 +59,7 @@ export default function AdminPage() {
   const [menu, setMenu] = useState("pesan");
   const [open, setOpen] = useState(false);
   const router = useRouter();
-  const [foto, setFoto] = useState("/images/admin.jpg");
+  const [foto, setFoto] = useState(" ");
   const [admin, setAdmin] =
     useState<Admin | null>(null);
   const [pengajuan, setPengajuan] =
@@ -68,17 +68,20 @@ export default function AdminPage() {
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [aktivitas, setAktivitas] =
     useState<Aktivitas[]>([]);
-  const [adminLogin, setAdminLogin] = useState(null);
+const [adminLogin, setAdminLogin] = useState<Admin | null>(null);
 
 useEffect(() => {
-  const adminLogin = JSON.parse(
-    localStorage.getItem("admin") || "{}"
-  );
+  const loadAdmin = () => {
+    const data = JSON.parse(
+      localStorage.getItem("admin") || "{}"
+    );
 
-  console.log(adminLogin);
+    console.log(data);
+    setAdminLogin(data);
+  };
+
+  loadAdmin();
 }, []);
-
-  console.log(adminLogin);
     useEffect(() => {
     const loadData = async () => {
       try {
@@ -152,7 +155,7 @@ const handleGantiFoto = async (
   const file =
     e.target.files?.[0];
 
-  if (!file || !admin) return;
+  if (!file || !adminLogin) return;
 
   const formData =
     new FormData();
@@ -175,6 +178,19 @@ const handleGantiFoto = async (
     await uploadRes.json();
 
   setFoto(uploadData.url);
+  const adminBaru = {
+  ...adminLogin,
+  fotoProfil:
+    uploadData.url,
+};
+
+localStorage.setItem(
+  "admin",
+  JSON.stringify(adminBaru)
+);
+
+setAdminLogin(adminBaru);
+setFoto(uploadData.url);
 };
 
   const updateStatus =
@@ -299,7 +315,7 @@ const handleGantiFoto = async (
           <div className="p-6 mt-4">
 
             <h1 className="text-3xl font-bold mb-10">
-              {admin?.nama || "Admin"}
+              {adminLogin?.nama || "Admin"}
             </h1>
 
             <div className="space-y-3">
@@ -824,8 +840,12 @@ const handleGantiFoto = async (
         font-bold
       "
     >
-      <img
-  src={foto}
+<img
+  src={
+    foto ||
+    adminLogin?.fotoProfil ||
+    "/images/admin.jpg"
+  }
   
   alt="Foto Admin"
   className="
@@ -851,7 +871,7 @@ const handleGantiFoto = async (
           dark:text-white
         "
       >
-        Admin SIPMO
+        {adminLogin?.nama}
       </h1>
 
       <p className="text-gray-500 mt-1">
@@ -865,7 +885,7 @@ const handleGantiFoto = async (
             Username
           </p>
           <p className="font-semibold dark:text-white">
-            admin
+            {adminLogin?.username}
           </p>
         </div>
 
@@ -874,7 +894,7 @@ const handleGantiFoto = async (
             Email
           </p>
           <p className="font-semibold dark:text-white">
-            admin@sipmo.com
+            {adminLogin?.email}
           </p>
         </div>
 
@@ -883,7 +903,7 @@ const handleGantiFoto = async (
             Role
           </p>
           <p className="font-semibold dark:text-white">
-            Super Admin
+            {adminLogin?.role}
           </p>
         </div>
 
