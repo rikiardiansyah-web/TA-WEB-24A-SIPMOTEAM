@@ -61,8 +61,6 @@ export default function AdminPage() {
   const router = useRouter();
   const [adminProfile, setAdminProfile] = useState<Admin | null>(null);
 const [editMode, setEditMode] = useState(false);
-  const [admin, setAdmin] =
-    useState<Admin | null>(null);
   const [pengajuan, setPengajuan] =
     useState<Pengajuan[]>([]);
   const [chats, setChats] = useState<Chat[]>([]);
@@ -72,9 +70,14 @@ const [editMode, setEditMode] = useState(false);
 
 useEffect(() => {
   const loadProfile = async () => {
-    const admin = JSON.parse(localStorage.getItem("admin") || "{}");
+    const adminData = JSON.parse(localStorage.getItem("admin") || "{}");
 
-    const res = await fetch(`/api/admin/profile?id=${admin.id}`);
+    if (!adminData.id) {
+      router.push("/login");
+      return;
+    }
+
+    const res = await fetch(`/api/admin/profile?id=${adminData.id}`);
     const data = await res.json();
 
     setAdminProfile(data);
@@ -155,7 +158,7 @@ const handleGantiFoto = async (
   const file =
     e.target.files?.[0];
 
-  if (!file || !adminLogin) return;
+  if (!file || !adminProfile) return;
 
   const formData =
     new FormData();
@@ -177,10 +180,21 @@ const handleGantiFoto = async (
   const uploadData =
     await uploadRes.json();
 
-setAdminProfile({
+const updated = {
   ...adminProfile!,
   fotoProfil: uploadData.url,
+};
+
+setAdminProfile(updated);
+
+await fetch("/api/admin/update", {
+  method: "PATCH",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify(updated),
 });
+};
 
   const updateStatus =
   async (
@@ -304,7 +318,7 @@ setAdminProfile({
           <div className="p-6 mt-4">
 
             <h1 className="text-3xl font-bold mb-10">
-              {adminLogin?.nama || "Admin"}
+              {adminProfile?.nama || "Admin"}
             </h1>
 
             <div className="space-y-3">
