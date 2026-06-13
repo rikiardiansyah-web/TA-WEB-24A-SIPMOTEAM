@@ -5,7 +5,22 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import "./navadmin.css";
 
-export default function NavAdmin() {
+type Admin = {
+  id: number;
+  username: string;
+  nama: string;
+  email?: string;
+  noHp?: string;
+  fotoProfil?: string;
+  role: string;
+  aktif: boolean;
+};
+
+export default function NavAdmin({
+  adminProfile,
+}: {
+  adminProfile: Admin | null;
+}) {
   const pathname = usePathname();
 
   const [darkMode, setDarkMode] = useState(() => {
@@ -47,45 +62,45 @@ export default function NavAdmin() {
       <div className="navleft">
         <span className="text">SIPMO ADMIN</span>
       </div>
+<div className="navright">
+<Link
+  href="/admin"
+  className="flex items-center gap-3 p-2 rounded-xl hover:bg-[#03618f] transition"
+>
+  Profil
+</Link>
 
-      <div className={`navright ${menuOpen ? "open" : ""}`}>
+<button
+  onClick={() => {
+    setMenu("pembangunan");
+    setOpen(false);
+  }}
+  className="flex items-center gap-3 p-2 rounded-xl hover:bg-[#03618f] transition"
+>
+  Profil
+</button>
 
-        <Link href="/admin" className={linkClass("/admin")}>
-          Home
-        </Link>
+{/* AVATAR ADMIN - FIXED SIZE */}
+<div className="w-8 h-8 rounded-full overflow-hidden bg-gray-300 shrink-0">
+  {adminProfile?.fotoProfil ? (
+    <img
+      src={adminProfile.fotoProfil}
+      className="w-full h-full object-cover"
+    />
+  ) : (
+    <div className="w-full h-full flex items-center justify-center bg-cyan-700 text-white text-xs font-bold">
+      {adminProfile?.nama?.[0] || "A"}
+    </div>
+  )}
+</div>
 
-              <button
-                onClick={() => {
-                  setMenu("pembangunan");
-                  setOpen(false);
-                }}
-                className="
-                  flex items-center gap-3
-                  w-full
-                  p-4 rounded-2xl
-                  hover:bg-[#03618f]
-                  transition
-                "
-              >
-                Profil
-              </button>
-
-        <button
-          onClick={() => setDarkMode(!darkMode)}
-          className="toggle-btn"
-        >
-          {darkMode ? "☀ Light" : "☾ Dark"}
-        </button>
-
-      </div>
-
-      <button
-        className="hamburger"
-        onClick={() => setMenuOpen(!menuOpen)}
-      >
-        {menuOpen ? "✕" : "☰"}
-      </button>
-
+<button
+  onClick={() => setDarkMode(!darkMode)}
+  className="toggle-btn"
+>
+  {darkMode ? "☀ Light" : "☾ Dark"}
+</button>
+    </div>
     </div>
   );
 }

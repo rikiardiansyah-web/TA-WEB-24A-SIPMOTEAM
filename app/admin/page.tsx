@@ -268,7 +268,7 @@ await fetch("/api/admin/profile/update", {
 
   return (
     <>
-      <NavAdmin />
+      <NavAdmin adminProfile={adminProfile}/>
 
       <div className="flex min-h-screen pt-[70px] bg-gradient-to-br from-cyan-100 via-white to-sky-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
         <button
