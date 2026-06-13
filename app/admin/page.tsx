@@ -721,6 +721,20 @@ const handleGantiFoto = (
                         >
                           {item.status}
                         </span>
+                          {item.pdfUrl && (
+                            <a
+                              href={item.pdfUrl}
+                              target="_blank"
+                              className="
+                                block
+                                text-blue-600
+                                underline
+                                mt-2
+                              "
+                            >
+                              Lihat PDF Hasil
+                            </a>
+                          )}
 
                       </div>
 
