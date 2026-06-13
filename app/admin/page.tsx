@@ -79,6 +79,7 @@ const dataAktivitas =
   await resAktivitas.json();
 
 setAktivitas(dataAktivitas);
+console.log("AKTIVITAS:", aktivitas);
 
       } catch (error) {
         console.error(error);
@@ -196,6 +197,7 @@ const handleGantiFoto = (
   console.log("HASIL UPDATE:", result);
 
   location.reload();
+  
 
 };
 
