@@ -38,6 +38,12 @@ type Pengajuan = {
   fileUrl?: string;
 };
 
+type Aktivitas = {
+  id: number;
+  aktivitas: string;
+  createdAt: string;
+};
+
 export default function AdminPage() {
   const [menu, setMenu] = useState("pesan");
   const [open, setOpen] = useState(false);
@@ -47,6 +53,8 @@ export default function AdminPage() {
     useState<Pengajuan[]>([]);
   const [chats, setChats] = useState<Chat[]>([]);
   const [pdfFile, setPdfFile] = useState<File | null>(null);
+const [aktivitas, setAktivitas] =
+  useState<Aktivitas[]>([]);
 
   useEffect(() => {
     const loadData = async () => {
@@ -63,6 +71,14 @@ export default function AdminPage() {
           await resPengajuan.json();
 
         setPengajuan(dataPengajuan);
+
+        const resAktivitas =
+  await fetch("/api/aktivitas");
+
+const dataAktivitas =
+  await resAktivitas.json();
+
+setAktivitas(dataAktivitas);
 
       } catch (error) {
         console.error(error);
@@ -1029,7 +1045,11 @@ const handleGantiFoto = (
   </div>
 </div>
           )}
-          {menu === "aktivitas" && (
+          
+  
+    
+
+    {menu === "aktivitas" && (
   <div
     className="
       bg-white
@@ -1043,52 +1063,47 @@ const handleGantiFoto = (
       Riwayat Aktivitas Admin
     </h1>
 
-    <div className="space-y-4">
-      {pengajuan.map((item) => (
-        <div
-          key={item.id}
-          className="
-            border
-            rounded-xl
-            p-4
-            dark:border-slate-700
-          "
-        >
-          <h3 className="font-bold dark:text-white">
-            {item.nama}
-          </h3>
-
-          <p className="text-gray-500">
-            {item.judul}
-          </p>
-
-          <p
-            className={`
-              mt-2 font-semibold
-              ${
-                item.status === "diacc"
-                  ? "text-green-600"
-                  : item.status === "ditolak"
-                  ? "text-red-600"
-                  : item.status === "diproses"
-                  ? "text-blue-600"
-                  : "text-yellow-600"
-              }
-            `}
+    <div
+      className="
+        bg-slate-100
+        dark:bg-slate-800
+        rounded-2xl
+        p-4
+        max-h-[500px]
+        overflow-y-auto
+      "
+    >
+      {aktivitas.length === 0 ? (
+        <p className="text-gray-500">
+          Belum ada aktivitas
+        </p>
+      ) : (
+        aktivitas.map((item) => (
+          <div
+            key={item.id}
+            className="
+              border-b
+              border-slate-300
+              dark:border-slate-700
+              py-3
+            "
           >
-            Status: {item.status}
-          </p>
+            <p className="font-medium dark:text-white">
+              {item.aktivitas}
+            </p>
 
-          <p className="text-sm text-gray-400 mt-1">
-            {new Date(
-              item.createdAt
-            ).toLocaleString("id-ID")}
-          </p>
-        </div>
-      ))}
+            <p className="text-xs text-gray-500">
+              {new Date(item.createdAt).toLocaleString("id-ID")}
+            </p>
+          </div>
+        ))
+      )}
     </div>
   </div>
 )}
+
+  
+
 
         </main>
       </div>
