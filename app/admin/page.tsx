@@ -68,11 +68,15 @@ export default function AdminPage() {
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [aktivitas, setAktivitas] =
     useState<Aktivitas[]>([]);
+  const [adminLogin, setAdminLogin] = useState(null);
 
-  const adminLogin =
-  JSON.parse(
+useEffect(() => {
+  const adminLogin = JSON.parse(
     localStorage.getItem("admin") || "{}"
   );
+
+  console.log(adminLogin);
+}, []);
 
   console.log(adminLogin);
     useEffect(() => {
@@ -92,13 +96,17 @@ export default function AdminPage() {
         setPengajuan(dataPengajuan);
 
         const resAktivitas =
-  await fetch("/api/aktivitas");
+          await fetch("/api/aktivitas");
 
-  const dataAktivitas =
-    await resAktivitas.json();
+        const dataAktivitas =
+          await resAktivitas.json();
 
-setAktivitas(dataAktivitas);
-console.log("AKTIVITAS:", aktivitas);
+        setAktivitas(dataAktivitas);
+
+console.log(
+  "AKTIVITAS DARI API:",
+  dataAktivitas
+);
 
       } catch (error) {
         console.error(error);
@@ -291,7 +299,7 @@ const handleGantiFoto = async (
           <div className="p-6 mt-4">
 
             <h1 className="text-3xl font-bold mb-10">
-              SIPMO Admin
+              {admin?.nama || "Admin"}
             </h1>
 
             <div className="space-y-3">
