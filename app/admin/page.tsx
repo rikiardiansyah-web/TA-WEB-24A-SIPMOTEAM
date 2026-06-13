@@ -44,6 +44,17 @@ type Aktivitas = {
   createdAt: string;
 };
 
+type Admin = {
+  id: number;
+  username: string;
+  nama: string;
+  email?: string;
+  noHp?: string;
+  fotoProfil?: string;
+  role: string;
+  aktif: boolean;
+};
+
 export default function AdminPage() {
   const [menu, setMenu] = useState("pesan");
   const [open, setOpen] = useState(false);
