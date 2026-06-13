@@ -60,14 +60,22 @@ export default function AdminPage() {
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const [foto, setFoto] = useState("/images/admin.jpg");
+  const [admin, setAdmin] =
+    useState<Admin | null>(null);
   const [pengajuan, setPengajuan] =
     useState<Pengajuan[]>([]);
   const [chats, setChats] = useState<Chat[]>([]);
   const [pdfFile, setPdfFile] = useState<File | null>(null);
-const [aktivitas, setAktivitas] =
-  useState<Aktivitas[]>([]);
+  const [aktivitas, setAktivitas] =
+    useState<Aktivitas[]>([]);
 
-  useEffect(() => {
+  const adminLogin =
+  JSON.parse(
+    localStorage.getItem("admin") || "{}"
+  );
+
+  console.log(adminLogin);
+    useEffect(() => {
     const loadData = async () => {
       try {
         const res = await fetch("/api/chat");
@@ -86,8 +94,8 @@ const [aktivitas, setAktivitas] =
         const resAktivitas =
   await fetch("/api/aktivitas");
 
-const dataAktivitas =
-  await resAktivitas.json();
+  const dataAktivitas =
+    await resAktivitas.json();
 
 setAktivitas(dataAktivitas);
 console.log("AKTIVITAS:", aktivitas);
@@ -130,16 +138,35 @@ const ditolak =
       item.status === "ditolak"
   );
 
-const handleGantiFoto = (
+const handleGantiFoto = async (
   e: React.ChangeEvent<HTMLInputElement>
 ) => {
-  const file = e.target.files?.[0];
+  const file =
+    e.target.files?.[0];
 
-  if (!file) return;
+  if (!file || !admin) return;
 
-  const url = URL.createObjectURL(file);
+  const formData =
+    new FormData();
 
-  setFoto(url);
+  formData.append(
+    "file",
+    file
+  );
+
+  const uploadRes =
+    await fetch(
+      "/api/admin/upload-foto",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+  const uploadData =
+    await uploadRes.json();
+
+  setFoto(uploadData.url);
 };
 
   const updateStatus =
