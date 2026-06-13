@@ -187,7 +187,7 @@ const updated = {
 
 setAdminProfile(updated);
 
-await fetch("/api/admin/update", {
+await fetch("/api/admin/profile/update", {
   method: "PATCH",
   headers: {
     "Content-Type": "application/json",
@@ -817,327 +817,165 @@ await fetch("/api/admin/update", {
             <DataWarga />
           )}
           {menu === "pembangunan" && (
-            <div
-  className="
-    bg-white dark:bg-[#1e293b]
-    rounded-3xl
-    p-10
-    shadow-lg
-  "
->
-  <div className="flex flex-col md:flex-row items-center gap-8">
-    
-    {/* Foto Profil */}
-    <div
-      className="
-        w-32 h-32
-        rounded-full
-        bg-gradient-to-br
-        from-cyan-500
-        to-blue-700
-        flex
-        items-center
-        justify-center
-        text-white
-        text-5xl
-        font-bold
-      "
-    >
-<img
-  src={
-    adminProfile?.fotoProfil ||
-    "/images/admin.jpg"
-  }
-  
-  alt="Foto Admin"
-  className="
-    w-32
-    h-32
-    rounded-full
-    object-cover
-    border-4
-    border-cyan-500
-    shadow-lg
-  "
-/>
+  <div className="bg-white dark:bg-[#1e293b] rounded-3xl p-10 shadow-lg">
 
-    </div>
+    <div className="flex flex-col items-center">
 
-<div>
-  <label>ID Admin</label>
-  <input
-    value={adminProfile?.id}
-    readOnly
-    className="sipmo-input mt-2"
-  />
-</div>
+      {/* FOTO PROFIL */}
+      <div className="relative">
 
-    {/* Informasi Admin */}
-    <div className="flex-1">
-      <h1
-        className="
-          text-3xl
-          font-bold
-          text-slate-800
-          dark:text-white
-        "
-      >
+        {adminProfile?.fotoProfil ? (
+          <img
+            src={adminProfile.fotoProfil}
+            className="w-32 h-32 rounded-full object-cover border-4 border-cyan-500"
+          />
+        ) : (
+          <div className="w-32 h-32 rounded-full bg-cyan-700 flex items-center justify-center text-white text-4xl font-bold">
+            {adminProfile?.nama?.[0]}
+          </div>
+        )}
+
+        {/* EDIT FOTO (ONLY ICON AREA) */}
+        <label className="absolute bottom-0 right-0 bg-cyan-600 text-white p-2 rounded-full cursor-pointer text-xs">
+          ✎
+          <input
+            type="file"
+            accept="image/*"
+            hidden
+            onChange={handleGantiFoto}
+          />
+        </label>
+      </div>
+
+      {/* ID ADMIN (CENTER BAWAH FOTO - LOCKED) */}
+      <div className="mt-3 text-center">
+        <p className="text-gray-500 text-sm">ID Admin</p>
+        <p className="font-bold text-cyan-700 dark:text-cyan-400 text-lg">
+          {adminProfile?.id}
+        </p>
+      </div>
+
+      {/* NAMA */}
+      <h1 className="text-2xl font-bold mt-2 dark:text-white">
         {adminProfile?.nama}
       </h1>
 
-      <p className="text-gray-500 mt-1">
+      <p className="text-gray-500 text-sm">
         Administrator Sistem
       </p>
+    </div>
 
-      <div className="grid md:grid-cols-2 gap-4 mt-6">
-        
-        <div>
-          <p className="text-gray-500 text-sm">
-            Username
-          </p>
-          <p className="font-semibold dark:text-white">
-            {adminProfile?.username}
-          </p>
-        </div>
+    {/* FORM DATA */}
+    <div className="mt-8 space-y-4">
 
-        <div>
-          <p className="text-gray-500 text-sm">
-            Email
-          </p>
-          <p className="font-semibold dark:text-white">
-            {adminProfile?.email}
-          </p>
-        </div>
-
-        <div>
-          <p className="text-gray-500 text-sm">
-            Role
-          </p>
-          <p className="font-semibold dark:text-white">
-            {adminProfile?.role}
-          </p>
-        </div>
-
-        <div>
-          <p className="text-gray-500 text-sm">
-            Status
-          </p>
-          <span
-            className="
-              inline-block
-              px-3
-              py-1
-              rounded-full
-              bg-green-100
-              text-green-700
-              text-sm
-              font-medium
-            "
-          >
-            Aktif
-          </span>
-        </div>
-
-      </div>
-
-      <div className="mt-6">
-  <label
-    className="
-      px-6
-      py-3
-      bg-cyan-600
-      hover:bg-cyan-700
-      text-white
-      rounded-xl
-      transition
-      cursor-pointer
-      inline-block
-    "
-  >
-    Edit Profil
-
-    <input
-      type="file"
-      accept="image/*"
-      hidden
-      onChange={handleGantiFoto}
-    />
-  </label>
-</div>
-       
-
-      <div className="grid md:grid-cols-3 gap-4 mt-8">
-
-  <div
-    className="
-      bg-cyan-100
-      dark:bg-cyan-900/30
-      rounded-2xl
-      p-5
-      text-center
-    "
-  >
-    <h3 className="text-gray-500 dark:text-gray-300">
-      Pesan Masuk
-    </h3>
-
-    <p className="text-3xl font-bold text-cyan-700 dark:text-cyan-400">
-      {chats.length}
-    </p>
-  </div>
-
-  <div
-    className="
-      bg-yellow-100
-      dark:bg-yellow-900/30
-      rounded-2xl
-      p-5
-      text-center
-    "
-  >
-    <h3 className="text-gray-500 dark:text-gray-300">
-      Pengajuan
-    </h3>
-
-    <p className="text-3xl font-bold text-yellow-700 dark:text-yellow-400">
-      {pengajuan.length}
-    </p>
-  </div>
-
-  <div
-    className="
-      bg-green-100
-      dark:bg-green-900/30
-      rounded-2xl
-      p-5
-      text-center
-    "
-  >
-    <h3 className="text-gray-500 dark:text-gray-300">
-      Status
-    </h3>
-
-    <p className="text-3xl font-bold text-green-700 dark:text-green-400">
-      Aktif
-    </p>
-  </div>
-
-</div>
-
-<div className="mt-10">
-  <h2
-    className="
-      text-2xl
-      font-bold
-      mb-5
-      dark:text-white
-    "
-  >
-    Statistik Pengajuan
-  </h2>
-
-  <div className="space-y-4">
-
-    {/* Diajukan */}
-    <div>
-      <div className="flex justify-between">
-        <span>Diajukan</span>
-        <span>{diajukan.length}</span>
-      </div>
-
-      <div className="w-full bg-gray-200 rounded-full h-4">
-        <div
-          className="bg-yellow-500 h-4 rounded-full"
-          style={{
-            width: `${
-              pengajuan.length === 0
-                ? 0
-                : (diajukan.length /
-                    pengajuan.length) *
-                  100
-            }%`,
-          }}
+      <div>
+        <label className="font-semibold">Username</label>
+        <input
+          value={adminProfile?.username || ""}
+          readOnly={!editMode}
+          onChange={(e) => setAdminProfile({
+            ...adminProfile!,
+            username: e.target.value,
+          })}
+          className="sipmo-input mt-2"
         />
       </div>
-    </div>
 
-    {/* Diproses */}
-    <div>
-      <div className="flex justify-between">
-        <span>Diproses</span>
-        <span>{diproses.length}</span>
-      </div>
-
-      <div className="w-full bg-gray-200 rounded-full h-4">
-        <div
-          className="bg-blue-500 h-4 rounded-full"
-          style={{
-            width: `${
-              pengajuan.length === 0
-                ? 0
-                : (diproses.length /
-                    pengajuan.length) *
-                  100
-            }%`,
-          }}
+      <div>
+        <label className="font-semibold">Email</label>
+        <input
+          value={adminProfile?.email || ""}
+          readOnly={!editMode}
+          onChange={(e) => setAdminProfile({
+            ...adminProfile!,
+            email: e.target.value,})
+          }
+          className="sipmo-input mt-2"
         />
       </div>
-    </div>
 
-    {/* Diterima */}
-    <div>
-      <div className="flex justify-between">
-        <span>Diterima</span>
-        <span>{diterima.length}</span>
-      </div>
-
-      <div className="w-full bg-gray-200 rounded-full h-4">
-        <div
-          className="bg-green-500 h-4 rounded-full"
-          style={{
-            width: `${
-              pengajuan.length === 0
-                ? 0
-                : (diterima.length /
-                    pengajuan.length) *
-                  100
-            }%`,
-          }}
+      <div>
+        <label className="font-semibold">No HP</label>
+        <input
+          value={adminProfile?.noHp || ""}
+          readOnly={!editMode}
+          onChange={(e) => setAdminProfile({
+            ...adminProfile!,
+            noHp: e.target.value,
+          })}
+          className="sipmo-input mt-2"
         />
       </div>
-    </div>
 
-    {/* Ditolak */}
-    <div>
-      <div className="flex justify-between">
-        <span>Ditolak</span>
-        <span>{ditolak.length}</span>
-      </div>
-
-      <div className="w-full bg-gray-200 rounded-full h-4">
-        <div
-          className="bg-red-500 h-4 rounded-full"
-          style={{
-            width: `${
-              pengajuan.length === 0
-                ? 0
-                : (ditolak.length /
-                    pengajuan.length) *
-                  100
-            }%`,
-          }}
+      <div>
+        <label className="font-semibold">Role</label>
+        <input
+          value={adminProfile?.role || ""}
+          readOnly
+          className="sipmo-input mt-2 bg-gray-100"
         />
       </div>
+
+      <div>
+        <label className="font-semibold">Status</label>
+        <input
+          value={adminProfile?.aktif ? "Aktif" : "Nonaktif"}
+          readOnly
+          className="sipmo-input mt-2 bg-gray-100"
+        />
+      </div>
+      <button
+  onClick={() => setEditMode(!editMode)}
+  className="mt-6 w-full bg-[#004467] text-white py-2 rounded-xl"
+>
+  {editMode ? "Batal" : "Edit Profil"}
+</button>
+{editMode && (
+  <button
+    onClick={async () => {
+      const res = await fetch("/api/admin/profile/update", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(adminProfile),
+      });
+
+      const data = await res.json();
+
+      setAdminProfile(data);
+      setEditMode(false);
+
+      alert("Profil berhasil disimpan");
+    }}
+    className="mt-6 w-full bg-green-600 text-white py-2 rounded-xl"
+  >
+    Simpan Perubahan
+  </button>
+)}
     </div>
 
+    {/* STAT BOX */}
+    <div className="grid md:grid-cols-3 gap-4 mt-8">
+
+      <div className="bg-cyan-100 dark:bg-cyan-900/30 p-5 rounded-2xl text-center">
+        <p>Pesan</p>
+        <h2 className="text-2xl font-bold">{chats.length}</h2>
+      </div>
+
+      <div className="bg-yellow-100 dark:bg-yellow-900/30 p-5 rounded-2xl text-center">
+        <p>Pengajuan</p>
+        <h2 className="text-2xl font-bold">{pengajuan.length}</h2>
+      </div>
+
+      <div className="bg-green-100 dark:bg-green-900/30 p-5 rounded-2xl text-center">
+        <p>Status</p>
+        <h2 className="text-2xl font-bold">Aktif</h2>
+      </div>
+
+    </div>
   </div>
-</div>
-
-    </div>
-
-  </div>
-</div>
-          )}
+)}
           
   
     
